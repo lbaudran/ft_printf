@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:28:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/03/22 17:48:40 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/03/22 18:37:17 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libftprintf.h"
@@ -14,10 +14,11 @@
 
 int				ft_printf(const char * format, ...)
 {
-	int i;
-	int n;
-	int y;
+	int		i;
+	int		n;
+	int		y;
 	va_list ap;
+	int		*tab[5];
 
 	n = 0;
 	i = 0;
@@ -25,17 +26,17 @@ int				ft_printf(const char * format, ...)
 	va_start(ap, format);
 	while (format[i])
 	{
-/*		if (format[i] == '%')
+		if (format[i] == '%')
 		{
 			while (format[i - y] == '\\')
 				y++;
 			if (y % 2 == 0)
-				n = check_start(i, format, ap);
+				n = check_start(i, format, ap, tab);
 			else
 				ft_putchar(format[i++]);
 		}
 		else
-*/			ft_putchar(format[i++]);
+			ft_putchar(format[i++]);
 	}
 		return(i - n);
 }

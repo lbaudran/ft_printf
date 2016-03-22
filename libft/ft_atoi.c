@@ -6,7 +6,7 @@
 /*   By: lbaudran <lbaudran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 12:10:53 by lbaudran          #+#    #+#             */
-/*   Updated: 2015/11/27 21:46:06 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/03/22 19:31:27 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int		ft_atoi(const char *s)
 	int		value;
 	int		signe;
 
+	if (!*s)
+		return (0);
 	signe = 1;
 	value = 0;
 	while (*s == ' ' || *s == '\n' || *s == '\v' || *s == '\f' || *s == '\t'

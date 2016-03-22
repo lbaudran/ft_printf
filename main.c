@@ -3,6 +3,6 @@
 int main()
 {
 
-	printf("%.0d",  10000000);
+	printf("%-----10.100s", "test");
 	return (0);
 }
