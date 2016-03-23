@@ -6,21 +6,21 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 16:36:37 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/03/22 19:34:05 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/03/23 14:33:11 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int			check_start(int i, const char * s, va_list *ap, int *tab)
+int			check_start(int i, const char *s, t_list *begin)
 {
-	int n;
+	int			n;
 
-	n = 0 ;
+	n = 0;
 	i++;
 		if (s[i] == '-' || s[i] == '+' || s[i] == ' ' || s[i] == '#')
 			n = check_flag(i, s, ap, tab);
-		else if ((s[i] >= '0' &&s[i] <= '9') || 
+		else if ((s[i] >= '0' && s[i] <= '9') || 
 			(s[i] == '0' && s[i + 1] >= '1' && s[i + 1] <= '9') || s[i] == '*')
 			n = check_width(i, s, ap, tab);
 		else if (s[i] == '.' && s[i + 1] >= '0' && s[i + 1] <= '9')
