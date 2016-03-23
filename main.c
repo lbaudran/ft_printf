@@ -2,7 +2,9 @@
 #include "stdio.h"
 int main()
 {
-
-	printf("%-----10.100s", "test");
+	int i = 0;
+	int tab[5];
+	while (i++ != 6)
+	printf("%d\n", tab[i]);
 	return (0);
 }
