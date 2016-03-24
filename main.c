@@ -2,9 +2,8 @@
 #include "stdio.h"
 int main()
 {
-	int i = 0;
-	int tab[5];
-	while (i++ != 6)
-	printf("%d\n", tab[i]);
+	int i = 2;
+	i = 12;
+	printf("%o", 20);
 	return (0);
 }

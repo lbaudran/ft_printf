@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 15:28:06 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/03/23 17:54:56 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/03/24 16:24:16 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,13 @@ int 			is_intforprintf(char c)
 		c == 'c')
 		return (1);
 	return (0);
+}
+
+int				is_typeforprintf(char c)
+{
+		if (c == 'd' || c == 'i' || c == 'o' || c == 'u' || c == 'x' || c == 'X'
+			|| c == 'f' || c == 'e' || c == 'E' || c == 'g' || c == 'G' ||
+			c == 'c' || c == 's' || c == 'p')
+			return (1);
+		return (0);
 }

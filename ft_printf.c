@@ -6,85 +6,20 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:28:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/03/23 18:39:04 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/03/24 19:29:50 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libftprintf.h"
 
-t_list			*create_begin(void)
-{
-	t_list	*begin;
-	int		i;
-
-	i = 0 ;
-	begin = (t_list*)malloc(sizeof(t_list));
-	begin->next = NULL;
-	begin->str = NULL;
-	begin->nbr = 0;
-	begin->tab = (int *)malloc(5);
-	while (i <= 5)
-		begin->tab[i++] = 0;
-	return (begin);
-}
-
-void			create_list(t_list *begin,char c, char *s)
-{
-	t_list	*elem;
-
-	elem = begin;
-	while (elem->next)
-		elem = elem->next;
-	if (is_intforprintf(c))
-	{
-		elem->next = (t_list*)malloc(sizeof(t_list));
-		elem->next->nbr = ft_atoi(s);
-		elem->next->str = NULL;
-		elem->next->next = NULL;
-		elem->tab = NULL;
-	}
-	else
-	{
-		elem->next = (t_list*)malloc(sizeof(t_list));
-		elem->next->nbr = 0;
-		elem->next->str = (char *)malloc(ft_strlen(s));
-		ft_strcpy(elem->next->str, s);
-		elem->next->next = NULL;
-		elem->tab = NULL;
-	}
-}
-int			stock_star(t_list *begin, int c, int compt);
-int			stock_tab(t_list *begin, int i, const char *format)
-{
-	char	tmp[12];
-	int		n;
-
-	n = 0;
-	if (format[i - 1] == '.')
-		n = 1;
-	while (ft_isdigit(format[i]))
-	{
-		tmp[i] = format[i];
-		i++;
-	}
-	if (n == 0)
-		begin->tab[1] = ft_atoi(tmp);
-	else
-		begin->tab[2] = ft_atoi(tmp);
-	if (format[i] == '.' && n == 0)
-		i++;
-	if (ft_isdigit(format[i]))
-		stock_tab(begin, i, format);
-	return (i);
-	
-}
 int 			ft_printf(const char *fmt, ...)
 {
 	int			y;
 	int			i;
-	t_list		*begin;
+	char		*line;
 	va_list		ap;
 
-	begin = create_begin();
+	line = (char *)malloc(ft_strlen(fmt));
+	va_start(ap, fmt);
 	i = 0;
 	while (fmt[i])
 	{
@@ -93,31 +28,41 @@ int 			ft_printf(const char *fmt, ...)
 			y = 1;
 			while (fmt[i - y++] == '\\');
 			if (y % 2 == 1)
-			{
-				while (NOARG(fmt[++i]));
-				if (ft_isdigit(fmt[i]))
-					stock_tab(begin, i, fmt);
-				if (fmt[i] == '*' && (NOARG(fmt[i - 1] || fmt[i - 1] == '%')))
-				{
-					stock_star(begin, va_arg(ap, int), 0);
-					i++;
-					if (fmt[i] == '.' && fmt[i++] == '*')
-						stock_star(begin, va_arg(ap, int), 1);
-				}
-				if (is_intforprintf(fmt[i]))
-					create_list(begin, fmt[i],ft_itoa(va_arg(ap, int)));
-				else if (fmt[i] == 's')
-					create_list(begin, fmt[i],va_arg(ap, char *));
-				else
+				if (!(line = stock_str(&ap, &i, line, fmt)))
 					return (-1);
-			}
 		}
-		i++;
 	}
-	start_write(fmt, begin);
-	return (begin->nbr);
+	va_end(ap);
+	return (0);
 }
 
+char			*stock_str(va_list *ap, int *i,char *line, const char *fmt)
+{
+	int *tab;
+	int		n;
+	char *tmp;
+	long long tmpint;
+	void	*test;
+
+	n = 0;
+	tab = (int *)malloc(7);
+	while (tab[n++] <= 8)
+		tab[n] = 0;
+	n = 0;
+	if (check_start(i, fmt, ap, &tab) == -1)
+		return (0);
+	if (is_intforprintf(tab[7]))
+		tmpint = va_arg(*ap, int);
+	if (tab[7] == 's')
+		tmp = va_arg(*ap, char *);
+	if (tab[7] == 'p')
+		test = va_arg(*ap, void *);
+	line = (char *)malloc(ft_strlen(tmp) + 1);
+	ft_strcpy(tmp, line);
+	return(line);
+}
+
+/*
 void			start_write(const char* format, t_list *begin)
 {
 	int		i;
@@ -148,3 +93,35 @@ void			start_write(const char* format, t_list *begin)
 		}
 	}
 }
+
+
+
+while (fmt[i])
+	{
+		if (fmt[i] == '%')
+		{
+			y = 1;
+			while (fmt[i - y++] == '\\');
+			if (y % 2 == 1)
+			{
+				while (NOARG(fmt[++i]));
+				if (ft_isdigit(fmt[i]))
+					stock_tab(begin, i, fmt);
+				if (fmt[i] == '*' && (NOARG(fmt[i - 1] || fmt[i - 1] == '%')))
+				{
+					stock_star(begin, va_arg(ap, int), 0);
+					i++;
+					if (fmt[i] == '.' && fmt[i++] == '*')
+						stock_star(begin, va_arg(ap, int), 1);
+				}
+				if (is_intforprintf(fmt[i]))
+					create_list(begin, fmt[i],ft_itoa(va_arg(ap, int)));
+				else if (fmt[i] == 's')
+					create_list(begin, fmt[i],va_arg(ap, char *));
+				else
+					return (-1);
+			}
+		}
+		i++;
+	}
+*/
