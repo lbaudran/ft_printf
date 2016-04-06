@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:28:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/03/24 19:29:50 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/03/30 17:26:42 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libftprintf.h"
@@ -26,39 +26,38 @@ int 			ft_printf(const char *fmt, ...)
 		if (fmt[i] == '%')
 		{
 			y = 1;
-			while (fmt[i - y++] == '\\');
+			while (fmt[i - y] == '\\')
+				y++;
 			if (y % 2 == 1)
-				if (!(line = stock_str(&ap, &i, line, fmt)))
+				if (!(stock_str(&ap, &i, line, fmt)))
 					return (-1);
 		}
 	}
 	va_end(ap);
-	return (0);
+	ft_putstr(line);
+	return (ft_strlen(line));
 }
 
-char			*stock_str(va_list *ap, int *i,char *line, const char *fmt)
+char			*stock_str(va_list *ap, int *i, char *line, const char *fmt)
 {
-	int *tab;
-	int		n;
-	char *tmp;
-	long long tmpint;
-	void	*test;
+	int				tab[8];
+	int				n;
+	char			*tmp;
+	long double		tmpint;
+	char			test;
 
 	n = 0;
-	tab = (int *)malloc(7);
 	while (tab[n++] <= 8)
 		tab[n] = 0;
 	n = 0;
-	if (check_start(i, fmt, ap, &tab) == -1)
+	if (check_start(i, fmt, ap, tab) == -1)
 		return (0);
-	if (is_intforprintf(tab[7]))
-		tmpint = va_arg(*ap, int);
+	if ((is_intforprintf(tab[7]) || tab[7] == 'p') && tab[7] != 'c')
+		tmpint = va_arg(*ap, long double);
+	if (tab[7] == 'c')
+		test = va_arg(*ap, int);
 	if (tab[7] == 's')
 		tmp = va_arg(*ap, char *);
-	if (tab[7] == 'p')
-		test = va_arg(*ap, void *);
-	line = (char *)malloc(ft_strlen(tmp) + 1);
-	ft_strcpy(tmp, line);
 	return(line);
 }
 
