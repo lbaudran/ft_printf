@@ -6,7 +6,7 @@
 /*   By: lbaudran <lbaudran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:30:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/01/13 16:46:26 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/12 18:17:17 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				**ft_strsplit(char const *str, char c);
 char				*ft_strtrim(char const *s);
-char				*ft_itoa(int n);
+char				*ft_itoa(long n);
 void				ft_putchar(char c);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char const *s, int fd);
@@ -75,7 +75,7 @@ int					ft_min(int *tab);
 void				ft_swap(int *a, int *b);
 int					ft_islower(char c);
 int					ft_isupper(char c);
-int					ft_power(int a, int b);
+long double			ft_power(long a, int b);
 char				*ft_realloc_str(char *str, size_t size);
 
 #endif

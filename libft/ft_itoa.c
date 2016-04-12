@@ -6,16 +6,16 @@
 /*   By: lbaudran <lbaudran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 14:55:30 by lbaudran          #+#    #+#             */
-/*   Updated: 2015/12/17 12:40:54 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/12 17:52:16 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-static int	ft_nbrchiff(int n)
+static long	ft_nbrchiff(long n)
 {
-	int		i;
+	long		i;
 
 	i = 0;
 	if (n == 0)
@@ -28,11 +28,11 @@ static int	ft_nbrchiff(int n)
 	return (i);
 }
 
-char		*ft_itoa(int n)
+char		*ft_itoa(long n)
 {
-	char			*str;
-	int				i;
-	unsigned int	nb;
+	char					*str;
+	long					i;
+	unsigned long			nb;
 
 	i = ft_nbrchiff(n);
 	nb = n;

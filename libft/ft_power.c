@@ -6,24 +6,23 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/22 16:09:32 by lbaudran          #+#    #+#             */
-/*   Updated: 2015/12/22 16:21:10 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/12 18:17:22 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-int		ft_power(int a, int b)
+long double		ft_power(long a, int b)
 {
-	int c;
+	long double c;
 
-	c = a;
-	while (b > 1)
-	{
-		a = a * c;
-		b--;
-	}
 	if (b == 0)
-		a = 1;
-	return (a);
+		return (1);
+	c = a;
+	while (b-- > 1)
+		c *= a ;
+	if (b < 0)
+		c = 1 / ft_power(a, -b);
+	return (c);
 }
