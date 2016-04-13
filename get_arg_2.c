@@ -6,7 +6,7 @@
 /*   By: rfernand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/04 16:35:36 by rfernand          #+#    #+#             */
-/*   Updated: 2016/04/13 18:52:48 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/13 19:04:29 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*get_scient(va_list *arg, char *buffer, int tab)
 	int		n;
 
 	i = va_arg((*arg), double);
-	n = size_forscient(*i);
-	buffer = arg_forscient(ft_dtoa(i), n);
+	n = size_forscient(&i);
+	buffer = arg_forscient(ft_dtoa(i, 6), n);
 	return(buffer);
 }

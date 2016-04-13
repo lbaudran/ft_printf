@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:47:27 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/13 18:53:15 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/13 19:06:04 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ char		*get_octal(va_list *arg, char *buffer, int *tab);
 char		*get_hexa_low(va_list *arg, char *buffer, int *tab);
 char		*get_hexa_up(va_list *arg, char *buffer, int *tab);
 char		*get_double(va_list *arg, char *buffer, int *tab);
+char		*get_scient(va_list *arg, char *buffer, int tab);
 int			size_forscient(double *i);
+char		*arg_forscient(char *buffer, int n);
 
 #endif
