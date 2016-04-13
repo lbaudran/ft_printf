@@ -6,40 +6,53 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:47:27 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/12 17:05:28 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/13 18:53:15 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
 
-#define NOARG is_noargforprintf
 # include <unistd.h>
 # include <stdlib.h>
-# include "libft.h"
+# include "libft/libft.h"
 # include <stdarg.h>
 
 typedef struct			s_list
 {
 	char				*tmpstr;
-	long double			tmpint;
-	int					i;
-	int					y;
-	int					n;
-}						t_list;
+	int		i;
+	int		y;
+	int		n;
+}			t_list;
 
-int				ft_printf(const char * format, ...);
-int				is_noargforprintf(char c);
-int				is_intforprintf(char c);
-void			start_write(const char* format, va_list *ap, int *tab);
-int				check_start(int *i, const char * s, va_list *ap, int *tab);
-void			check_flag(int *i, const char *s, int *tab);
-void			check_width(int *i, const char *s, va_list *ap, int *tab);
-void			check_acc(int *i, const char *s, va_list *ap, int *tab);
-int				check_type(int *i, const char *s, va_list *ap, int *tab);
-int				is_typeforprintf(char c);
-char			*stock_str(va_list *ap, int *i, char *line, const char *fmt);
-void			reset_tab(int *tab, int i);
-char			*putline_nbr(char *line, t_list *elem, int *tab);
-char			*putline_str(char *line, t_list *elem, int *tab, const char *fmt);
+int			ft_printf(const char * format, ...);
+int			is_noargforprintf(char c);
+int			is_intforprintf(char c);
+void		start_write(const char* format, va_list *ap, int *tab);
+int			check_start(int *i, const char * s, va_list *ap, int *tab);
+void		check_flag(int *i, const char *s, int *tab);
+void		check_width(int *i, const char *s, va_list *ap, int *tab);
+void		check_acc(int *i, const char *s, va_list *ap, int *tab);
+void		check_modif(int *i, const char *s, int *tab);
+int			check_type(int *tab , char c);
+int			is_typeforprintf(char c);
+char		*stock_str(va_list *ap, int *i, char *line, const char *fmt);
+void		reset_tab(int *tab, int i);
+char		*ft_dtoa(long double i, int size);
+char		*ft_convertbase(int i, int base);
+char		*putline_nbr(char *line, t_list *elem, int *tab);
+char		*putline_str(char *line, t_list *elem, int *tab, const char *fmt);
+char		*print_arg(int **tab, va_list *arg, char *str, const char *format);
+void		init_pt_tab(char *(**types)(va_list *arg, char *buffer, int *tab));
+char		*get_int(va_list *arg, char *buffer, int *tab);
+char		*get_char(va_list *arg, char *buffer, int *tab);
+char		*get_str(va_list *arg, char *buffer, int *tab);
+char		*get_int_ns(va_list *arg, char *buffer, int *tab);
+char		*get_octal(va_list *arg, char *buffer, int *tab);
+char		*get_hexa_low(va_list *arg, char *buffer, int *tab);
+char		*get_hexa_up(va_list *arg, char *buffer, int *tab);
+char		*get_double(va_list *arg, char *buffer, int *tab);
+int			size_forscient(double *i);
+
 #endif

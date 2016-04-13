@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:28:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/12 17:37:03 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/13 16:08:35 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libftprintf.h"
@@ -43,45 +43,11 @@ int 		ft_printf(const char *fmt, ...)
 char		*stock_str(va_list *ap, int *i, char *line, const char *fmt)
 {
 	int				tab[8];
-	t_list			*elem;
-	
 
-	elem = (t_list*)malloc(sizeof(t_list));
 	reset_tab(tab, 8);
 	if (check_start(i, fmt, ap, tab) == -1)
 		return (NULL);
-	if ((is_intforprintf(tab[7]) || tab[7] == 'p') && tab[7] != 'c')
-	{
-		create_tab_pointeur
-		init_tab_pointeur(va_list *ap)
-		putline_nbr(line, elem, tab);
-	}
-	else if (tab[7] == 's')
-	{
-		elem->tmpstr = va_arg(*ap, char *);
-		putline_str(line, elem, tab);
-	}
-	free(elem);
+	line = print_arg(tab, ap, line, fmt);
 	return(line);
 }
 
-char		*putline_str(char *line, t_list *elem, int *tab, const char *fmt)
-{
-	int			i;
-	int			a;
-	char		s[ft_strlen(line)];
-
-	i = 0;
-	a = 0;
-	ft_strcpy(s, line);
-	if (tab)
-	line = malloc(sizeof(char)* (ft_strlen(s) + ft_strlen(elem->tmpstr) + 
-				ft_strlen(fmt) + 1));
-	ft_bzero(line, ft_strlen(s) + ft_strlen(elem->tmpstr) + ft_strlen(fmt) + 1);
-	ft_strcpy(line, s);
-	while(line[a])
-		a++;
-	while (elem->tmpstr[i])
-		line[a++] = elem->tmpstr[i]++;
-	return(line);
-}

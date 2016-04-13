@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/22 16:09:32 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/12 18:17:22 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/13 18:05:22 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ long double		ft_power(long a, int b)
 		return (1);
 	c = a;
 	while (b-- > 1)
-		c *= a ;
+		c *= a;
 	if (b < 0)
 		c = 1 / ft_power(a, -b);
 	return (c);

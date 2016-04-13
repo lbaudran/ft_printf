@@ -6,7 +6,7 @@
 #    By: lbaudran <lbaudran@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/26 14:36:52 by jelefebv          #+#    #+#              #
-#    Updated: 2015/12/22 16:35:34 by lbaudran         ###   ########.fr        #
+#    Updated: 2016/04/13 17:38:35 by lbaudran         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,7 @@ ft_swap.c\
 ft_islower.c\
 ft_isupper.c\
 ft_power.c\
-ft_realloc_str.c
+ft_round.c
 
 SRC_O		=	$(SRC_C:.c=.o)
 

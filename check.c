@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 16:36:37 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/11 18:24:26 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/13 17:38:39 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,11 @@ int			check_start(int *i, const char *s, va_list *ap, int *tab)
 		if (s[*i] == '.' && ((s[(*i) + 1] >= '0' && s[(*i) + 1] <= '9') ||
 				s[(*i) + 1] == '*'))
 			check_acc(i, s, ap, tab);
-		if (s[*i] == 'h' || s[*i] == 'l' || s[*i] == 'L')
-			tab[6] = s[*i];
+		if (s[*i] == 'h' || s[*i] == 'l' || s[*i] == 'L' || s[*i] == 'j' 
+				|| s[*i] == 'z')
+			check_modif(i, s, ap, tab);
 		if (is_typeforprintf(s[*i]))
-		{
-			tab[7] = s[*i];
-			return(check_type(i, s, ap, tab));
-		}
+			return(check_type(tab, s[*i]));
 		return (-1);
 }
 
@@ -104,4 +102,30 @@ void			check_acc(int *i, const char *s,va_list *ap, int *tab)
 		tab[5] = va_arg(*ap, int);
 		(*i)++;
 	}
+}
+
+void			check_modif(int *i, const char *s, int *tab)
+{
+	if (s[*i] == 'h')
+	{
+		tab[6] = 2;
+		if (s[(*i + 1)] == 'h')
+			tab[6] = 1;
+	}
+	else if (s[*i] == 'l')
+	{
+		tab[6] = 3;
+		if (s[(*i + 1)] == 'l')
+			tab[6] = 4;
+	}
+	else if (s[*i] == 'j')
+		tab[6] = 5;
+	else if (s[*i] == 'z')
+		tab[6] = 6;
+	else if (s[*i] == 'L')
+		tab[6] = 7;
+	if (tab[6] != 0)
+		(*i)++;
+	if (tab[6] == 1 || tab[6] == 4)
+		(*i)++;
 }

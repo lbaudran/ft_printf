@@ -4,7 +4,7 @@
 int main()
 {
 	char *test = "1234567890";
-	printf("%15s", test);
+	printf("%e", -2.589);
 	return (0);
 }
 

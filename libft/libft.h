@@ -6,7 +6,7 @@
 /*   By: lbaudran <lbaudran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:30:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/12 18:17:17 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/13 18:04:52 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,12 @@ void				ft_putnbr_fd(int n, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putendl(char const *s);
 
-
 int					ft_max(int *tab);
 int					ft_min(int *tab);
 void				ft_swap(int *a, int *b);
 int					ft_islower(char c);
 int					ft_isupper(char c);
 long double			ft_power(long a, int b);
-char				*ft_realloc_str(char *str, size_t size);
+char				*ft_round(char *str, int size);
 
 #endif
