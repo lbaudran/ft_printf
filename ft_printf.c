@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:28:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/13 16:08:35 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/14 17:07:56 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libftprintf.h"
@@ -18,7 +18,8 @@ int 		ft_printf(const char *fmt, ...)
 	char		*line;
 	va_list		ap;
 
-	line = (char *)malloc(ft_strlen(fmt));
+	line = (char *)malloc(ft_strlen(fmt) + 1);
+	ft_bzero(line, ft_strlen(fmt) + 1);
 	va_start(ap, fmt);
 	i = 0;
 	a = 0;
@@ -36,7 +37,7 @@ int 		ft_printf(const char *fmt, ...)
 	va_end(ap);
 	ft_putstr(line);
 	a = ft_strlen(line);
-	free (line);
+	free(line);
 	return (a);
 }
 

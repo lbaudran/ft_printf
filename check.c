@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 16:36:37 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/13 17:38:39 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/14 15:41:24 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int			check_start(int *i, const char *s, va_list *ap, int *tab)
 	int			n;
 
 	n = 0;
-	i++;
+	(*i)++;
 		if (s[*i] == '-' || s[*i] == '+' || s[*i] == ' ' || s[*i] == '#')
 			check_flag(i, s, tab);
 		if ((s[*i] >= '0' && s[*i] <= '9') || s[*i] == '*')
@@ -27,9 +27,9 @@ int			check_start(int *i, const char *s, va_list *ap, int *tab)
 			check_acc(i, s, ap, tab);
 		if (s[*i] == 'h' || s[*i] == 'l' || s[*i] == 'L' || s[*i] == 'j' 
 				|| s[*i] == 'z')
-			check_modif(i, s, ap, tab);
+			check_modif(i, s, tab);
 		if (is_typeforprintf(s[*i]))
-			return(check_type(tab, s[*i]));
+			return(check_type(tab, s[(*i)++]));
 		return (-1);
 }
 
