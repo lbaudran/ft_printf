@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_int.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfernand <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/01 19:25:48 by rfernand          #+#    #+#             */
-/*   Updated: 2016/04/13 17:58:34 by lbaudran         ###   ########.fr       */
+/*   Created: 2016/04/01 19:25:48 by lbaudran          #+#    #+#             */
+/*   Updated: 2016/04/14 18:49:43 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 char	*get_int(va_list *arg, char *buffer, int *tab)
 {
-	int i;
-
-	i = va_arg((*arg), int);
+	intmax_t i;
+	i = va_arg((*arg), intmax_t);
 	buffer = ft_itoa(i);
 	return (buffer);
 }
@@ -46,9 +45,9 @@ char	*get_str(va_list *arg, char *buffer, int *tab)
 
 char	*get_int_ns(va_list *arg, char *buffer, int *tab)
 {
-	unsigned int i;
+	uintmax_t i;
 
-	i = va_arg((*arg), unsigned int);
+	i = va_arg((*arg), uintmax_t);
 	buffer = ft_itoa(i);
 	return (buffer);
 }

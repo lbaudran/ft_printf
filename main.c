@@ -3,12 +3,9 @@
 
 int main()
 {
-	double i = -10101010.12314534;
-	char *test = "1234567890";
-	ft_printf("%g\n", i);
-	ft_printf("%G\n", i);
-	printf("%g\n", i);
-	printf("%G\n", i);
+	unsigned long long i = -3402823700000000000;
+	char *test = "1235567890";
+	ft_printf("%u\n", i);
 	return (0);
 }
 
