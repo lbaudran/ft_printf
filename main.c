@@ -3,7 +3,7 @@
 
 int main()
 {
-	double i = 100.12314534;
+	double i = -100.12314534;
 	char *test = "1234567890";
 	ft_printf("%g\n", i);
 	ft_printf("%G\n", i);
