@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/01 19:25:48 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/15 16:17:05 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/15 16:33:48 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,5 @@ char	*get_octal(va_list *arg, char *buffer, int *tab)
 		ft_strcat(tmp, buffer);
 		return (tmp);
 	}
-	
 	return (buffer);
 }

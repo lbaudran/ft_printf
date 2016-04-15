@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 15:19:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/14 18:15:21 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/15 16:32:14 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@ char		*get_shorter(va_list *arg, char *buffer, int *tab)
 	n = 0;
 	i = va_arg((*arg), double);
 	y = i;
+	if (!tab[5])
+		tab[5] = 6;
 	if (y)
 		n = size_forscient(&y);
 	if (n > 5)
 	{
-		buffer = ft_dtoa(y, 5);
+		buffer = ft_dtoa(y, (tab[5]) - 1);
 		buffer = ft_round(buffer, ft_strlen(buffer) - 1);
 		a = ft_strlen(buffer) - 1;
 		while (buffer[a] == '0')
@@ -44,8 +46,11 @@ char		*get_shorter(va_list *arg, char *buffer, int *tab)
 		buffer = arg_forscient(buffer, n);
 		return (buffer);
 	}
-	buffer = ft_dtoa(i, 5 - n);
+	buffer = ft_dtoa(i, tab[5] -1 - n);
 	buffer = ft_round(buffer, ft_strlen(buffer) - 1);
+	a = ft_strlen(buffer) - 1;
+	while (buffer[a] == '0')
+			buffer[a--] = '\0';
 	return(buffer);
 }
 
