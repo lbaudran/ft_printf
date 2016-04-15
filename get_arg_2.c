@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_arg_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfernand <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/04 16:35:36 by rfernand          #+#    #+#             */
-/*   Updated: 2016/04/14 16:30:58 by lbaudran         ###   ########.fr       */
+/*   Created: 2016/04/04 16:35:36 by lbaudran          #+#    #+#             */
+/*   Updated: 2016/04/15 16:22:51 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,30 @@
 char	*get_hexa_low(va_list *arg, char *buffer, int *tab)
 {
 	int		i;
+	int		n;
+	char	*tmp;
 
+	n = 0;
 	i = va_arg((*arg), int);
 	buffer = ft_convertbase(i, 16);
+	if (tab[5] > ft_strlen(buffer))
+	{
+		tmp = (char *)malloc(tab[5] * sizeof(char));
+		while ((tab[5])-- > ft_strlen(buffer))
+			tmp[n++] = '0';
+		ft_strcat(tmp, buffer);
+		return (tmp);
+	}
 	return (buffer);
 }
 
 char	*get_hexa_up(va_list *arg, char *buffer, int *tab)
 {
 	int		i;
+	int		n;
+	char	*tmp;
 
+	n = 0;
 	i = va_arg((*arg), int);
 	buffer = ft_convertbase(i, 16);
 	i = 0;
@@ -34,6 +48,14 @@ char	*get_hexa_up(va_list *arg, char *buffer, int *tab)
 		buffer[i] = ft_toupper(buffer[i]);
 		i++;
 	}
+	if (tab[5] > ft_strlen(buffer))
+	{
+		tmp = (char *)malloc(tab[5] * sizeof(char));
+		while ((tab[5])-- > ft_strlen(buffer))
+			tmp[n++] = '0';
+		ft_strcat(tmp, buffer);
+		return (tmp);
+	}
 	return (buffer);
 }
 
@@ -41,8 +63,11 @@ char	*get_double(va_list *arg, char *buffer, int *tab)
 {
 	double	i;
 
+	if (tab[5] == 0)
+		tab[5] = 6;
 	i = va_arg((*arg), double);
-	buffer = ft_dtoa(i, 6);
+	buffer = ft_dtoa(i, tab[5]);
+	printf("%s\n\n", buffer);
 	buffer = ft_round(buffer, (ft_strlen(buffer) - 1));
 	return(buffer);
 }
@@ -54,9 +79,11 @@ char	*get_scient(va_list *arg, char *buffer, int *tab)
 
 	n = 0;
 	i = va_arg((*arg), double);
+	if (tab[5] == 0)
+		tab[5] = 6;
 	if (i)
 		n = size_forscient(&i);
-	buffer = ft_dtoa(i, 6);
+	buffer = ft_dtoa(i, tab[5]);
 	buffer = ft_round(buffer, ft_strlen(buffer) - 1);
 	buffer = arg_forscient(buffer, n);
 	return(buffer);
@@ -69,9 +96,11 @@ char	*get_scient_up(va_list *arg, char *buffer, int *tab)
 
 	n = 0;
 	i = va_arg((*arg), double);
+	if (tab[5] == 0)
+		tab[5] = 6;
 	if (i)
 		n = size_forscient(&i);
-	buffer = ft_dtoa(i, 6);
+	buffer = ft_dtoa(i, tab[5]);
 	buffer = ft_round(buffer, ft_strlen(buffer) - 1);
 	buffer = arg_forscient_up(buffer, n);
 	return(buffer);

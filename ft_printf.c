@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:28:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/14 17:07:56 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/15 15:30:40 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libftprintf.h"
@@ -46,9 +46,12 @@ char		*stock_str(va_list *ap, int *i, char *line, const char *fmt)
 	int				tab[8];
 
 	reset_tab(tab, 8);
+	if (fmt[(*i) + 1] == '%')
+		check_percent(fmt, i, line);
+	if (fmt[(*i)] != '%')
+		return (line);
 	if (check_start(i, fmt, ap, tab) == -1)
 		return (NULL);
 	line = print_arg(tab, ap, line, fmt);
-	return(line);
+	return (line);
 }
-

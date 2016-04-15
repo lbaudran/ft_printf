@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:47:27 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/14 16:49:03 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/15 15:07:31 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ char		*arg_forscient_up(char *buffer, int n);
 char		*get_point(va_list *arg, char *buffer, int *tab);
 char		*fill_point(char *buffer);
 char		*get_binary(va_list *arg, char *buffer, int *tab);
+char		*check_percent(const char *fmt, int *i, char *line);
 
 #endif

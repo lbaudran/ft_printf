@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:56:49 by rfernand          #+#    #+#             */
-/*   Updated: 2016/04/13 18:04:17 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/15 16:22:28 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char			*ft_round(char *str, int size)
 	int i;
 
 	i = ft_strlen(str) - 1;
-	if (str[i] <= '5')
+	if (str[i] < '5')
 		str[i] = '\0';
 	else
 	{

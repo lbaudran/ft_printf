@@ -3,9 +3,10 @@
 
 int main()
 {
-	unsigned long long i = -3402823700000000000;
-	char *test = "1235567890";
-	ft_printf("%u\n", i);
+	double i = 100.1234567;
+	char *test = "1234567890";
+	ft_printf("lol%.15flol\n", i);
+	printf("lol%.15flol\n", i);
 	return (0);
 }
 

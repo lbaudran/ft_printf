@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/01 19:25:48 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/14 18:49:43 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/15 16:17:05 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,21 @@
 
 char	*get_int(va_list *arg, char *buffer, int *tab)
 {
-	intmax_t i;
+	intmax_t	i;
+	int			n;
+	char		*tmp;
+
+	n = 0;
 	i = va_arg((*arg), intmax_t);
 	buffer = ft_itoa(i);
+	if (tab[5] > ft_strlen(buffer))
+	{
+		tmp = (char *)malloc(tab[5] * sizeof(char));
+		while ((tab[5])-- > ft_strlen(buffer))
+			tmp[n++] = '0';
+		ft_strcat(tmp, buffer);
+		return (tmp);
+	}
 	return (buffer);
 }
 
@@ -38,25 +50,51 @@ char	*get_str(va_list *arg, char *buffer, int *tab)
 	str = va_arg((*arg), char *);
 	buffer = (char *) malloc((ft_strlen(str) + 1) * sizeof(char));
 	ft_bzero(buffer, ft_strlen(str) + 1);
-	ft_strcpy(buffer, str);
+	if (tab[5])
+		ft_strncpy(buffer, str, tab[5]);
+	else
+		ft_strcpy(buffer, str);
 	return (buffer);
 
 }
 
 char	*get_int_ns(va_list *arg, char *buffer, int *tab)
 {
-	uintmax_t i;
+	uintmax_t	i;
+	char		*tmp;
+	int			n;
 
+	n = 0;
 	i = va_arg((*arg), uintmax_t);
+	if (tab[5] > ft_strlen(buffer))
+	{
+		tmp = (char *)malloc(tab[5] * sizeof(char));
+		while ((tab[5])-- > ft_strlen(buffer))
+			tmp[n++] = '0';
+		ft_strcat(tmp, buffer);
+		return (tmp);
+	}
 	buffer = ft_itoa(i);
 	return (buffer);
 }
 
 char	*get_octal(va_list *arg, char *buffer, int *tab)
 {
-	int i;
+	int			i;
+	int			n;
+	char		*tmp;
 
+	n = 0;
 	i = va_arg((*arg), int);
 	buffer = ft_convertbase(i, 8);
+	if (tab[5] > ft_strlen(buffer))
+	{
+		tmp = (char *)malloc(tab[5] * sizeof(char));
+		while ((tab[5])-- > ft_strlen(buffer))
+			tmp[n++] = '0';
+		ft_strcat(tmp, buffer);
+		return (tmp);
+	}
+	
 	return (buffer);
 }
