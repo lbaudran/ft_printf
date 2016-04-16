@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/04 16:35:36 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/15 16:22:51 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/16 17:00:44 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ char	*get_double(va_list *arg, char *buffer, int *tab)
 		tab[5] = 6;
 	i = va_arg((*arg), double);
 	buffer = ft_dtoa(i, tab[5]);
-	printf("%s\n\n", buffer);
 	buffer = ft_round(buffer, (ft_strlen(buffer) - 1));
 	return(buffer);
 }

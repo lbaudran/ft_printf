@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/01 19:25:48 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/15 16:33:48 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/16 17:02:25 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 char	*get_int(va_list *arg, char *buffer, int *tab)
 {
-	intmax_t	i;
+	int			i;
 	int			n;
 	char		*tmp;
 
 	n = 0;
-	i = va_arg((*arg), intmax_t);
+	i = va_arg((*arg), int);
 	buffer = ft_itoa(i);
 	if (tab[5] > ft_strlen(buffer))
 	{
@@ -60,16 +60,16 @@ char	*get_str(va_list *arg, char *buffer, int *tab)
 
 char	*get_int_ns(va_list *arg, char *buffer, int *tab)
 {
-	uintmax_t	i;
+	unsigned int	i;
 	char		*tmp;
 	int			n;
 
 	n = 0;
-	i = va_arg((*arg), uintmax_t);
-	if (tab[5] > ft_strlen(buffer))
+	i = va_arg((*arg), unsigned int);
+	if (tab[5] > (int)ft_strlen(buffer))
 	{
 		tmp = (char *)malloc(tab[5] * sizeof(char));
-		while ((tab[5])-- > ft_strlen(buffer))
+		while ((tab[5])-- > (int)ft_strlen(buffer))
 			tmp[n++] = '0';
 		ft_strcat(tmp, buffer);
 		return (tmp);

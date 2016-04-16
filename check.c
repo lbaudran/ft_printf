@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 16:36:37 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/14 15:41:24 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/16 16:47:30 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,14 @@ int			check_start(int *i, const char *s, va_list *ap, int *tab)
 			check_flag(i, s, tab);
 		if ((s[*i] >= '0' && s[*i] <= '9') || s[*i] == '*')
 			check_width(i, s, ap, tab);
-		if (s[*i] == '.' && ((s[(*i) + 1] >= '0' && s[(*i) + 1] <= '9') ||
-				s[(*i) + 1] == '*'))
+		if (s[*i] == '.')
 			check_acc(i, s, ap, tab);
 		if (s[*i] == 'h' || s[*i] == 'l' || s[*i] == 'L' || s[*i] == 'j' 
 				|| s[*i] == 'z')
 			check_modif(i, s, tab);
 		if (is_typeforprintf(s[*i]))
-			return(check_type(tab, s[(*i)++]));
-		return (-1);
+			check_type(tab, s[(*i)++]);
+		return (1);
 }
 
 void			check_flag(int *i, const char *s, int *tab)
@@ -39,14 +38,14 @@ void			check_flag(int *i, const char *s, int *tab)
 
 	ft_bzero(tmp, 4);
 	while (s[*i] == '-' || s[*i] == '+' || s[*i] == ' ' || s[*i] == '#'
-			|| s[*i] =='0')
+			|| s[*i] == '0')
 	{
 		if (s[*i] == '-'  && tab[0] != '-')
 			tab[0] = '-';
 		if (s[*i] == '+' && tab[1] != '+')
 			tab[1] = '+';
 		if (s[*i] == ' ' && tab[1] != ' ' && tab[1] != '+')
-			tab[1] = '+';
+			tab[1] = ' ';
 		if (s[*i] == '#'  && tab[2] != '#')
 			tab[2] = '#';
 		if (s[*i] == '0' && tab[3] != '0')
@@ -88,8 +87,9 @@ void			check_acc(int *i, const char *s,va_list *ap, int *tab)
 	ft_bzero(tmp, 19);
 	if ((s[*i] == '0' && !ft_isdigit(s[(*i) + 1])) || !ft_isdigit(s[*i]))
 	{
-		tab[5] = '0';
-		i++;
+		tab[5] = -1;
+		if (s[*i] == '0')
+			(*i)++;
 	}
 	else if (s[*i] >= '0' && s[*i] <= '9')
 	{

@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:28:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/15 15:30:40 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/16 17:43:56 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libftprintf.h"
@@ -54,4 +54,15 @@ char		*stock_str(va_list *ap, int *i, char *line, const char *fmt)
 		return (NULL);
 	line = print_arg(tab, ap, line, fmt);
 	return (line);
+}
+
+int	main()
+{
+	char c = -1;
+	char t[2];
+	t[0] = c;
+	ft_printf("%c aaa\n", NULL);
+	printf("%c aaa\n", c);
+	printf("%s", t);
+
 }

@@ -6,7 +6,7 @@
 /*   By: rfernand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/07 15:42:00 by rfernand          #+#    #+#             */
-/*   Updated: 2016/04/14 18:01:14 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/16 14:46:36 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ char	*ft_dtoa(long double i, int size)
 		str[u++] = n + '0';
 		i = i - (long double) n;
 	}
+	if (str[ft_strlen(str) - 2] == '.' && str[ft_strlen(str) - 1] == '0')
+		str[ft_strlen(str) - 1] = '\0';
 	return (str);
 }

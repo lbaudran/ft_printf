@@ -6,7 +6,7 @@
 /*   By: lbaudran <lbaudran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:30:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/13 18:04:52 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/16 15:43:08 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void				ft_putnbr(int n);
 void				ft_putnbr_fd(int n, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putendl(char const *s);
+
 
 int					ft_max(int *tab);
 int					ft_min(int *tab);
