@@ -6,7 +6,7 @@
 /*   By: rfernand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/02 15:33:59 by rfernand          #+#    #+#             */
-/*   Updated: 2016/04/14 15:31:24 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/18 14:57:26 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ char			*ft_convertbase(int i, int base)
 	y = i;
 	n = 0;
 	u = 0;
+	if (!i)
+		return(ft_itoa(0));
 	while (y >= 1)
 	{
 		y /= base;

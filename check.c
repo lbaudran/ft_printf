@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 16:36:37 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/16 16:47:30 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/18 19:04:14 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int			check_start(int *i, const char *s, va_list *ap, int *tab)
 
 	n = 0;
 	(*i)++;
-		if (s[*i] == '-' || s[*i] == '+' || s[*i] == ' ' || s[*i] == '#')
+		if (s[*i] == '-' || s[*i] == '+' || s[*i] == ' ' || s[*i] == '#'
+				|| s[*i] == '0')
 			check_flag(i, s, tab);
 		if ((s[*i] >= '0' && s[*i] <= '9') || s[*i] == '*')
 			check_width(i, s, ap, tab);
@@ -48,8 +49,8 @@ void			check_flag(int *i, const char *s, int *tab)
 			tab[1] = ' ';
 		if (s[*i] == '#'  && tab[2] != '#')
 			tab[2] = '#';
-		if (s[*i] == '0' && tab[3] != '0')
-			tab[3] = '0';
+		if (s[*i] == '0' && tab[0] != '0' && tab[0] != '-')
+			tab[0] = '0';
 		(*i)++;
 	}
 }

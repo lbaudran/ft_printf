@@ -6,10 +6,26 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:28:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/16 17:43:56 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/18 19:14:29 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libftprintf.h"
+
+int			ft_putprintf(char *line)
+{
+	int		a;
+
+	a = 0;
+	while (line[a])
+	{
+		if (line[a] == -127)
+			line[a] = 0;
+		write(1, &line[a], 1);
+		a++;
+	}
+	return(a);
+}
+
 
 int 		ft_printf(const char *fmt, ...)
 {
@@ -35,8 +51,7 @@ int 		ft_printf(const char *fmt, ...)
 			line[a++] = fmt[i++];
 	}
 	va_end(ap);
-	ft_putstr(line);
-	a = ft_strlen(line);
+	a = ft_putprintf(line);
 	free(line);
 	return (a);
 }
@@ -55,14 +70,15 @@ char		*stock_str(va_list *ap, int *i, char *line, const char *fmt)
 	line = print_arg(tab, ap, line, fmt);
 	return (line);
 }
-
+/*
 int	main()
 {
+	int	i = 1;
 	char c = -1;
 	char t[2];
 	t[0] = c;
-	ft_printf("%c aaa\n", NULL);
-	printf("%c aaa\n", c);
-	printf("%s", t);
+	char	w = (char)-127;
+	ft_printf("%.0000000010i\n", -i);
+	printf("%.00000000010i\n", -i);
 
-}
+}*/
