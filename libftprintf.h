@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:47:27 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/19 15:52:38 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/19 17:11:57 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ char		*putline_nbr(char *line, t_list *elem, int *tab);
 char		*putline_str(char *line, t_list *elem, int *tab, const char *fmt);
 char		*print_arg(int *tab, va_list *arg, char *str, const char *format);
 void		init_pt_tab(char *(**types)(va_list *arg, char *buffer, int *tab));
+char		*check_percent(va_list *arg, char *buffer, int *tab);
 char		*get_int(va_list *arg, char *buffer, int *tab);
 char		*get_char(va_list *arg, char *buffer, int *tab);
 char		*get_str(va_list *arg, char *buffer, int *tab);
@@ -64,7 +65,6 @@ char		*arg_forscient_up(char *buffer, int n);
 char		*get_point(va_list *arg, char *buffer, int *tab);
 char		*fill_point(char *buffer);
 char		*get_binary(va_list *arg, char *buffer, int *tab);
-char		*check_percent(const char *fmt, int *i, char *line);
 char		*ft_apply_flag(int *tab, char *buffer);
 void		init_diez_tab(char *(**diez)(char *tmp, char *buffer, int *tab));
 char		*ft_add_empty(char *tmp, int *tab, char *buffer);

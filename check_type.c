@@ -6,7 +6,7 @@
 /*   By: rfernand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 18:32:59 by rfernand          #+#    #+#             */
-/*   Updated: 2016/04/16 17:07:37 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/19 17:25:58 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,25 +54,10 @@ int		check_type(int *tab, char c)
 	return (-1);
 }
 
-char		*check_percent(const char *fmt, int *i, char *line)
+char		*check_percent(va_list *arg, char *buffer, int *tab)
 {
-	int		y;
-	int		n;
-
-	y = 0;
-	while (fmt[(*i)] == '%')
-	{
-		(*i)++;
-		y++;
-	}
-	if (y % 2 == 1)
-		(*i)--;
-	y /= 2;
-	n = ft_strlen(line);
-	while (y)
-	{
-		line[n++] = '%';
-		y--;
-	}
-	return (line);
+	buffer = (char *)malloc(2 * sizeof(char));
+	buffer[0] = '%';
+	buffer[1] = '\0';
+	return (buffer);
 }

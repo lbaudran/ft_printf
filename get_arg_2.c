@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/04 16:35:36 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/16 17:00:44 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/19 18:07:07 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ char	*get_hexa_low(va_list *arg, char *buffer, int *tab)
 	n = 0;
 	i = va_arg((*arg), int);
 	buffer = ft_convertbase(i, 16);
-	if (tab[5] > ft_strlen(buffer))
+	if (buffer[0] == '0' && tab[5] == -1)
+		buffer[0] = '\0';
+	if (tab[5] > (int)ft_strlen(buffer))
 	{
 		tmp = (char *)malloc(tab[5] * sizeof(char));
 		while ((tab[5])-- > ft_strlen(buffer))
@@ -48,7 +50,9 @@ char	*get_hexa_up(va_list *arg, char *buffer, int *tab)
 		buffer[i] = ft_toupper(buffer[i]);
 		i++;
 	}
-	if (tab[5] > ft_strlen(buffer))
+	if (buffer[0] == '0' && tab[5] == -1)
+		buffer[0] = '\0';
+	if (tab[5] > (int)ft_strlen(buffer))
 	{
 		tmp = (char *)malloc(tab[5] * sizeof(char));
 		while ((tab[5])-- > ft_strlen(buffer))

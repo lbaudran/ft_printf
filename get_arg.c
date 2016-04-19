@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/01 19:25:48 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/18 19:17:14 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/19 18:06:24 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ char	*get_int(va_list *arg, char *buffer, int *tab)
 	n = 0;
 	i = va_arg((*arg), int);
 	buffer = ft_itoa(i);
-	if (tab[5] > ft_strlen(buffer))
+	if (buffer[0] == '0' && tab[5] == -1)
+		buffer[0] = '\0';
+	if (tab[5] > (int)ft_strlen(buffer))
 	{
 		tmp = (char *)malloc(tab[5] * sizeof(char));
 		if (buffer[0] == '-' || buffer[0] == '+')
@@ -81,6 +83,8 @@ char	*get_int_ns(va_list *arg, char *buffer, int *tab)
 	n = 0;
 	i = va_arg((*arg), unsigned int);
 	buffer = ft_utoa(i);
+	if (buffer[0] == '0' && tab[5] == -1)
+		buffer[0] = '\0';
 	if (tab[5] > (int)ft_strlen(buffer))
 	{
 		tmp = (char *)malloc(tab[5] * sizeof(char));
@@ -101,7 +105,7 @@ char	*get_octal(va_list *arg, char *buffer, int *tab)
 	n = 0;
 	i = va_arg((*arg), int);
 	buffer = ft_convertbase(i, 8);
-	if (tab[5] > ft_strlen(buffer))
+	if (tab[5] > (int)ft_strlen(buffer))
 	{
 		tmp = (char *)malloc(tab[5] * sizeof(char));
 		while ((tab[5])-- > ft_strlen(buffer))
