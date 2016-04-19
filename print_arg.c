@@ -6,7 +6,7 @@
 /*   By: rfernand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 16:55:42 by rfernand          #+#    #+#             */
-/*   Updated: 2016/04/18 18:55:11 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/19 15:11:48 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ char		*ft_apply_flag(int *tab, char *buffer)
 		&& buffer[0] != '-')
 		tmp[0] = tab[1];
 	if (tab[2])
-		if ((tab[7] >= 4 && tab[7] <= 10) || tab[7] == 2)
-			tmp = diez[tab[7]](tmp, buffer, tab);
+		if ((tab[7] >= 4 && tab[7] <= 10) || tab[7] == 2 || tab[7] == 14)
+			buffer = diez[tab[7]](tmp, buffer, tab);
 	ft_strcat(tmp, buffer);
 	if (tab[4] > ft_strlen(buffer))
 		buffer = ft_add_empty(tmp, tab, buffer);

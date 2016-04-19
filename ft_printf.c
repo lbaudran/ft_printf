@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:28:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/18 19:14:29 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/19 16:31:11 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libftprintf.h"
@@ -78,7 +78,6 @@ int	main()
 	char t[2];
 	t[0] = c;
 	char	w = (char)-127;
-	ft_printf("%.0000000010i\n", -i);
-	printf("%.00000000010i\n", -i);
-
+	ft_printf("%#.g\n", 1100.00);
+	printf("%#.g\n", 1100.00);
 }*/

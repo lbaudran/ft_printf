@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 15:19:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/16 14:50:10 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/19 16:41:57 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,18 @@ char		*get_shorter(va_list *arg, char *buffer, int *tab)
 		tab[5] = 1;
 	if (y)
 		n = size_forscient(&y);
-	if (n > tab[5])
-	{
-		buffer = ft_dtoa(y, (tab[5]) - 1);
-		buffer = ft_round(buffer, ft_strlen(buffer) - 1);
-		a = ft_strlen(buffer) - 1;
-		while (buffer[a] == '0')
-			buffer[a--] = '\0';
-		buffer = arg_forscient(buffer, n);
-		return (buffer);
-	}
-	if (n < tab[5] - 1)
+	if (n <= tab[5] - 1)
 		buffer = ft_dtoa(i, tab[5] -1 -n);
 	else
 		buffer = ft_dtoa(i, tab[5] - 1);
 	buffer = ft_round(buffer, ft_strlen(buffer) - 1);
 	a = ft_strlen(buffer) - 1;
 	while (buffer[a] == '0')
-			buffer[a--] = '\0';
+		buffer[a--] = '\0';
+	if (buffer[a] == '.')
+		buffer[a] = '\0';
+	if (n > tab[5])
+		buffer = arg_forscient(buffer, n);
 	return(buffer);
 }
 

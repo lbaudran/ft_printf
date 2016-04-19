@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:47:27 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/18 18:40:59 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/19 15:52:38 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,13 @@ char		*ft_apply_flag(int *tab, char *buffer);
 void		init_diez_tab(char *(**diez)(char *tmp, char *buffer, int *tab));
 char		*ft_add_empty(char *tmp, int *tab, char *buffer);
 char		*ft_utoa(unsigned int n);
+char		*apply_diez_octal(char *tmp, char *buffer, int *tab);
+char		*apply_diez_hexa_low(char *tmp, char *buffer, int *tab);
+char		*apply_diez_binary(char *tmp, char *buffer, int *tab);
+char		*apply_diez_hexa_up(char *tmp, char *buffer, int *tab);
+char		*apply_diez_double(char *tmp, char *buffer, int *tab);
+char		*apply_diez_scient_low(char *tmp, char *buffer, int *tab);
+char		*apply_diez_shorter_low(char *tmp, char *buffer, int *tab);
+char		*apply_diez_shorter_low2(char *tmp, char *buffer, int *tab);
 
 #endif
