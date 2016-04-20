@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:47:27 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/19 17:11:57 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/20 16:54:42 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct			s_list
 	int		n;
 }			t_list;
 
+int				is_check(char c);
 int			ft_printf(const char * format, ...);
 int			is_noargforprintf(char c);
 int			is_intforprintf(char c);
@@ -41,7 +42,7 @@ int			is_typeforprintf(char c);
 char		*stock_str(va_list *ap, int *i, char *line, const char *fmt);
 void		reset_tab(int *tab, int i);
 char		*ft_dtoa(long double i, int size);
-char		*ft_convertbase(int i, int base);
+char		*ft_convertbase(long i, int base);
 char		*putline_nbr(char *line, t_list *elem, int *tab);
 char		*putline_str(char *line, t_list *elem, int *tab, const char *fmt);
 char		*print_arg(int *tab, va_list *arg, char *str, const char *format);

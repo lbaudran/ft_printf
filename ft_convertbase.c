@@ -6,7 +6,7 @@
 /*   By: rfernand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/02 15:33:59 by rfernand          #+#    #+#             */
-/*   Updated: 2016/04/18 14:57:26 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/20 15:47:06 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ static char		check_value(int i)
 	return (0);
 }
 
-char			*ft_convertbase(int i, int base)
+char			*ft_convertbase(long i, int base)
 {
-	int		n;
-	int		u;
-	int		y;
-	char	*str;
+	int					n;
+	int					u;
+	long	y;
+	char				*str;
 
 	y = i;
 	n = 0;
@@ -53,7 +53,7 @@ char			*ft_convertbase(int i, int base)
 	while (n--)
 	{
 		str[u++] = check_value(i / ft_power(base, n));
-		i = i % (int)ft_power(base, n);
+		i = i % (unsigned long long)ft_power(base, n);
 	}
 	return (str);
 }

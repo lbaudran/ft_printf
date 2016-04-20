@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/23 15:28:06 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/19 17:25:24 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/20 16:56:52 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int				is_noargforprintf(char c)
 {
 	if (c == '.' || c == '+' || c == '-' || c == '#' || c == ' ' || c == 'l' ||
-		c == 'L' || c == 'h')
+		c == 'L' || c == 'h' || c == 'j' || c == 'z')
 		return (1);
 	else if (ft_isdigit(c))
 		return (1);
@@ -48,4 +48,14 @@ void			reset_tab(int *tab, int i)
 	n = 0;
 	while (n <= i)
 		tab[n++] = 0;
+	tab[3] = ' ';
+}
+
+int				is_check(char c)
+{
+		if (is_typeforprintf(c))
+			return(1);
+		if (is_noargforprintf(c))
+			return(1);
+		return(0);
 }

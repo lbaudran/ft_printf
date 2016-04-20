@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/19 14:31:41 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/19 15:02:44 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/20 15:40:15 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,21 @@ char		*apply_diez_octal(char *tmp, char *buffer, int *tab)
 
 char		*apply_diez_hexa_low(char *tmp, char *buffer, int *tab)
 {
+	if (buffer[0] != '0' && tab[5] != -1)
+	{
 	tmp[0] = '0';
 	tmp[1] = 'x';
+	}
 	return(buffer);
 }
 
 char		*apply_diez_hexa_up(char *tmp, char *buffer, int *tab)
 {
+	if (buffer[0] != '0' && tab[5] != -1)
+	{
 	tmp[0] = '0';
 	tmp[1] = 'X';
+	}
 	return(buffer);
 }
 

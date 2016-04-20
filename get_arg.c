@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/01 19:25:48 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/19 18:06:24 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/20 17:14:03 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ char	*get_int(va_list *arg, char *buffer, int *tab)
 	int			i;
 	int			n;
 	char		*tmp;
+	int			y;
 
+	y = tab[5];
 	n = 0;
 	i = va_arg((*arg), int);
 	buffer = ft_itoa(i);
@@ -29,9 +31,9 @@ char	*get_int(va_list *arg, char *buffer, int *tab)
 		if (buffer[0] == '-' || buffer[0] == '+')
 		{
 			tmp[n++] = buffer[0];
-			ft_memmove(buffer, buffer+1, ft_strlen(buffer));
+			ft_memmove(buffer, buffer + 1, ft_strlen(buffer));
 		}
-		while ((tab[5])-- > ft_strlen(buffer))
+		while (y-- > ft_strlen(buffer))
 			tmp[n++] = '0';
 		ft_strcat(tmp, buffer);
 		return (tmp);
@@ -98,13 +100,16 @@ char	*get_int_ns(va_list *arg, char *buffer, int *tab)
 
 char	*get_octal(va_list *arg, char *buffer, int *tab)
 {
-	int			i;
-	int			n;
-	char		*tmp;
+	unsigned int			i;
+	int						n;
+	char					*tmp;
 
 	n = 0;
-	i = va_arg((*arg), int);
+	//buffer = 
+	i = va_arg((*arg), unsigned int);
 	buffer = ft_convertbase(i, 8);
+	if (buffer[0] && tab[5] == -1)
+		buffer[0] = '\0';
 	if (tab[5] > (int)ft_strlen(buffer))
 	{
 		tmp = (char *)malloc(tab[5] * sizeof(char));

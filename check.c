@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 16:36:37 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/19 17:25:39 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/20 16:54:46 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int			check_start(int *i, const char *s, va_list *ap, int *tab)
 
 	n = 0;
 	(*i)++;
+	while (is_check(s[*i]))
+	{
 		if (s[*i] == '-' || s[*i] == '+' || s[*i] == ' ' || s[*i] == '#'
 				|| s[*i] == '0')
 			check_flag(i, s, tab);
@@ -29,15 +31,16 @@ int			check_start(int *i, const char *s, va_list *ap, int *tab)
 				|| s[*i] == 'z')
 			check_modif(i, s, tab);
 		if (is_typeforprintf(s[*i]))
+		{
 			check_type(tab, s[(*i)++]);
+			return(1);
+		}
+	}
 		return (1);
 }
 
 void			check_flag(int *i, const char *s, int *tab)
 {
-	char tmp[4];
-
-	ft_bzero(tmp, 4);
 	while (s[*i] == '-' || s[*i] == '+' || s[*i] == ' ' || s[*i] == '#'
 			|| s[*i] == '0')
 	{
@@ -50,7 +53,10 @@ void			check_flag(int *i, const char *s, int *tab)
 		if (s[*i] == '#'  && tab[2] != '#')
 			tab[2] = '#';
 		if (s[*i] == '0' && tab[0] != '0' && tab[0] != '-')
+		{
+			tab[3] = '0';
 			tab[0] = '0';
+		}
 		(*i)++;
 	}
 }

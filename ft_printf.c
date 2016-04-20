@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:28:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/19 18:07:26 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/20 17:03:57 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libftprintf.h"
@@ -58,8 +58,9 @@ int 		ft_printf(const char *fmt, ...)
 
 char		*stock_str(va_list *ap, int *i, char *line, const char *fmt)
 {
-	int				tab[8];
+	int				*tab;
 
+	tab = (int *)malloc(8 * sizeof(int));
 	reset_tab(tab, 8);
 	if (fmt[(*i)] != '%')
 		return (line);
@@ -71,11 +72,12 @@ char		*stock_str(va_list *ap, int *i, char *line, const char *fmt)
 /*
 int	main()
 {
-	int	i = 1;
+	int	i = 0;
 	char c = -1;
 	char *t;
 	t = "%5.0x";
 	char	w = (char)-127;
-	ft_printf("@moulitest: %5.x", t, 0, 0);
+	ft_printf("%....d\n", 42);
+	printf("%#0 55.1d\n" , 42);
 	//printf("@moulitest: %5.x", t, 0, 0);
 }*/

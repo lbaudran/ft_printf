@@ -6,7 +6,7 @@
 /*   By: rfernand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 16:55:42 by rfernand          #+#    #+#             */
-/*   Updated: 2016/04/19 17:26:58 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/20 17:11:49 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ char		*print_arg(int *tab, va_list *arg, char *str, const char *format)
 	buf = (char *)malloc((n + 1) * sizeof(char));
 	ft_strcpy(buf, str);
 	init_pt_tab(types);
+	if (!tab[7])
+		return(str);
 	buffer = types[tab[7]](arg, buffer, tab);
 	free (str);
 	buffer = ft_apply_flag(tab, buffer);
@@ -42,6 +44,8 @@ char		*ft_apply_flag(int *tab, char *buffer)
 	char	*tmp;
 	char	*(*diez[11])(char *tmp, char *buffer, int *tab);
 
+	if (tab[4] > tab[5] && tab[3] == '0' && tab[5] != 0 && buffer[0] != '-' && buffer[0] != '+')
+		tab[3] = ' ';
 	init_diez_tab(diez);
 	if (tab[4] > ft_strlen(buffer))
 	{
@@ -60,8 +64,8 @@ char		*ft_apply_flag(int *tab, char *buffer)
 		if ((tab[7] >= 4 && tab[7] <= 10) || tab[7] == 2 || tab[7] == 14)
 			buffer = diez[tab[7]](tmp, buffer, tab);
 	ft_strcat(tmp, buffer);
-	if (tab[4] > ft_strlen(buffer))
-		buffer = ft_add_empty(tmp, tab, buffer);
+	if (tab[4] > strlen(buffer))
+		tmp = ft_add_empty(tmp, tab, buffer);
 	return(tmp);
 }
 
@@ -73,17 +77,14 @@ char		*ft_add_empty(char *tmp, int *tab, char *buffer)
 
 	i = 0;
 	n = ft_strlen(tmp);
-	if (tab[0] != '0')
-		tab[3] = ' ';
-	else
-		tab[3] = '0';
 	if (tab[0] == '-')
 		while (tab[4] - n)
 			tmp[n++] = tab[3];
 	else
 	{
 		ft_bzero(tmp2, tab[4] + 1);
-		if ((tmp[0] == '-' || tmp[0] == '+') && tab[3] == '0')
+		while ((tmp[0] == '-' || tmp[0] == '+' || tmp[0] == 'x' || tmp[0] == '0'
+					|| tmp[0] == 'X') && tab[3] == '0')
 		{
 			tmp2[i++] = tmp[0];
 			ft_memmove(tmp, tmp + 1, ft_strlen(tmp));
