@@ -6,11 +6,11 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 16:56:49 by rfernand          #+#    #+#             */
-/*   Updated: 2016/04/15 16:22:28 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/25 17:15:15 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../SRC/libftprintf.h"
 #include <stdlib.h>
 
 static char		*ft_resize_round(char *str)

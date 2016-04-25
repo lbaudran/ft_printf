@@ -6,11 +6,11 @@
 /*   By: lbaudran <lbaudran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 16:55:20 by lbaudran          #+#    #+#             */
-/*   Updated: 2015/12/16 16:44:00 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/25 17:17:39 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../SRC/libftprintf.h"
 
 char	*ft_strncpy(char *dst, const char *src, size_t n)
 {

@@ -6,11 +6,11 @@
 /*   By: lbaudran <lbaudran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 14:55:30 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/12 17:52:16 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/25 18:29:14 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../SRC/libftprintf.h"
 #include <stdlib.h>
 
 static long	ft_nbrchiff(long n)
