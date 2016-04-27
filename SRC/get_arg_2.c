@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/04 16:35:36 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/25 17:45:14 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/27 17:08:54 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,28 +47,48 @@ char	*get_hexa_up(va_list *arg, char *buffer, int *tab)
 
 char	*get_double(va_list *arg, char *buffer, int *tab)
 {
-	double	i;
+	double		i;
+	long double	y;
 
 	if (tab[5] == 0)
 		tab[5] = 6;
-	i = va_arg((*arg), double);
-	buffer = ft_dtoa(i, tab[5]);
+	if (tab[6] == 7)
+	{
+		y = va_arg((*arg), long double);
+		buffer = ft_dtoa(y, tab[5]);
+	}
+	else
+	{
+		i = va_arg((*arg), double);
+		buffer = ft_dtoa(i, tab[5]);
+	}
 	buffer = ft_round(buffer, (ft_strlen(buffer) - 1));
 	return (buffer);
 }
 
 char	*get_scient(va_list *arg, char *buffer, int *tab)
 {
-	double	i;
-	int		n;
+	double		i;
+	int			n;
+	long double	y;
 
 	n = 0;
-	i = va_arg((*arg), double);
 	if (tab[5] == 0)
 		tab[5] = 6;
-	if (i)
-		n = size_forscient(&i);
-	buffer = ft_dtoa(i, tab[5]);
+	if (tab[6] == 7)
+	{
+		y = va_arg((*arg), long double);
+		if (y)
+			n = size_forscient(&y);
+		buffer = ft_dtoa(y, tab[5]);
+	}
+	else
+	{
+		i = va_arg((*arg), double);
+		if (i)
+			n = size_forscient_normal(&i);
+		buffer = ft_dtoa(i, tab[5]);
+	}
 	buffer = ft_round(buffer, ft_strlen(buffer) - 1);
 	buffer = arg_forscient(buffer, n);
 	return (buffer);
@@ -76,16 +96,27 @@ char	*get_scient(va_list *arg, char *buffer, int *tab)
 
 char	*get_scient_up(va_list *arg, char *buffer, int *tab)
 {
-	double	i;
-	int		n;
+	double		i;
+	int			n;
+	long double	y;
 
 	n = 0;
-	i = va_arg((*arg), double);
 	if (tab[5] == 0)
 		tab[5] = 6;
-	if (i)
-		n = size_forscient(&i);
-	buffer = ft_dtoa(i, tab[5]);
+	if (tab[6] == 7)
+	{
+		y = va_arg((*arg), long double);
+		if (y)
+			n = size_forscient(&y);
+		buffer = ft_dtoa(y, tab[5]);
+	}
+	else
+	{
+		i = va_arg((*arg), double);
+		if (i)
+			n = size_forscient_normal(&i);
+		buffer = ft_dtoa(i, tab[5]);
+	}
 	buffer = ft_round(buffer, ft_strlen(buffer) - 1);
 	buffer = arg_forscient_up(buffer, n);
 	return (buffer);

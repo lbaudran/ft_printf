@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 15:46:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/25 19:34:03 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/26 11:33:59 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,6 @@ char		*fill_point(char *buffer)
 	i = ft_strlen(buffer);
 	tmp[0] = '0';
 	tmp[1] = 'x';
-	if (i++ < 12)
-	{
-		tmp[2] = '7';
-		while (i++ < 12)
-			tmp[n++] = 'f';
-	}
 	ft_strcat(tmp, buffer);
 	free(buffer);
 	buffer = (char *)malloc(15 * sizeof(char));

@@ -6,13 +6,41 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/13 18:23:18 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/14 16:50:03 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/27 17:04:11 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int			size_forscient(double *i)
+int			size_forscient_normal(double *i)
+{
+	int		n;
+	int		s;
+
+	s = 1;
+	n = 0;
+	if ((*i) < 0)
+	{
+		s = -1;
+		(*i) = -(*i);
+	}
+	if (((*i) > 9))
+		while ((*i) > 9)
+		{
+			(*i) = (*i) / 10;
+			n++;
+		}
+	else
+		while (((*i) < 1))
+		{
+			(*i) *= 10;
+			n--;
+		}
+	(*i) *= s;
+	return(n);
+}
+
+int			size_forscient(long double *i)
 {
 	int		n;
 	int		s;

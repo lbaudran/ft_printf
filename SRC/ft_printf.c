@@ -6,77 +6,103 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:28:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/25 18:53:46 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/27 19:08:22 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int			ft_putprintf(char *line)
+void		ft_clear_struct(t_list *elem)
 {
-	int		a;
+	free(elem->line);
+	free(elem->unicode);
+}
 
-	a = 0;
-	while (line[a])
+t_list		*create_struct(const char *fmt)
+{
+	t_list		*elem;
+
+	elem = (t_list *)malloc(sizeof(t_list));
+	elem->index = 0;
+	elem->line = (char *)malloc((ft_strlen(fmt) + 1) * sizeof(char));
+	elem->unicode = (wchar_t *)malloc((ft_strlen(fmt) + 1)* sizeof(wchar_t *));
+	ft_bzero(elem->line, ft_strlen(fmt) + 1);
+	ft_bzero(elem->unicode, ft_strlen(fmt) + 1);
+	return (elem);
+}
+
+void			ft_putprintf(int *tab, t_list *elem)
+{
+	int		i;
+
+	i = 0;
+	elem->index += write(1, elem->line, ft_strlen(elem->line));
+	ft_bzero(elem->line, ft_strlen(elem->line));
+	while (elem->unicode[i])
 	{
-		if (line[a] == -127)
-			line[a] = 0;
-		write(1, &line[a], 1);
-		a++;
+		if (elem->unicode[i] <= 0x7F)
+			write(1, &elem->unicode[i], 1);
+		else if (elem->unicode[i] <= 0x7FF)
+			write(1, &elem->unicode[i], 2);
+		else if (elem->unicode[i] <= 0xFFFF)
+			write(1, &elem->unicode[i], 3);
+		else if (elem->unicode[i] <= 0x10FFFF)
+			write(1, &elem->unicode[i], 4);
+		i++;
+		(elem->index)++;
 	}
-	return (a);
 }
 
 int			ft_printf(const char *fmt, ...)
 {
 	int			a;
 	int			i;
-	char		*line;
+	t_list		*elem;
 	va_list		ap;
 
-	line = (char *)malloc(ft_strlen(fmt) + 1);
-	ft_bzero(line, ft_strlen(fmt) + 1);
+	elem = create_struct(fmt);
 	va_start(ap, fmt);
 	i = 0;
 	a = 0;
 	while (fmt[i])
 	{
-		a = ft_strlen(line);
+		a = ft_strlen(elem->line);
 		if (fmt[i] == '%')
-			line = stock_str(&ap, &i, line, fmt);
+			elem->line = stock_str(&ap, &i, elem, fmt);
 		else
-			line[a++] = fmt[i++];
+			elem->line[a++] = fmt[i++];
 	}
 	va_end(ap);
-	a = ft_putprintf(line);
-	free(line);
-	return (a);
+	elem->index += write(1, elem->line, ft_strlen(elem->line));
+	ft_clear_struct(elem);
+	return (elem->index);
 }
 
-char		*stock_str(va_list *ap, int *i, char *line, const char *fmt)
+char		*stock_str(va_list *ap, int *i, t_list *elem, const char *fmt)
 {
 	int				*tab;
 
 	tab = (int *)malloc(9 * sizeof(int));
 	reset_tab(tab, 9);
 	if (fmt[(*i)] != '%')
-		return (line);
+		return (elem->line);
 	if (check_start(i, fmt, ap, tab) == -1)
 		return (NULL);
-	line = print_arg(tab, ap, line, fmt);
+	elem->line = print_arg(tab, ap, elem, fmt);
 	free(tab);
-	return (line);
+	return (elem->line);
 }
 /*
 int	main()
 {
-	int	i = 0;
+	int	i;
 	char c = -1;
 	char *t;
 	t = "%5.0x";
 	char	w = (char)-127;
-	ft_printf("%zd", 10);
-	printf("%zd", 10);
-//	printf("%#0 55.1d\n" , 42);
+	i = printf("%Le\n", (long double)-1);
+//	printf("%d\n" , i);
+	i = ft_printf("%Le\n", (long double)-1);
+//	printf("%d\n" , i);
 	//printf("@moulitest: %5.x", t, 0, 0);
 }*/

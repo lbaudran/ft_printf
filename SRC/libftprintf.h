@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:47:27 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/25 19:11:10 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/27 18:59:12 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@
 typedef struct			s_list
 {
 	char				*line;
-	int		testint;
-}			t_list;
+	int					index;
+	wchar_t				*unicode;
+}						t_list;
 
+void			ft_putprintf(int *tab, t_list *elem);
 char		*ft_addzero(char *buffer, int *tab);
 void		ft_add_nul(char *buffer, int a);
 int			is_check(char c);
@@ -38,13 +40,13 @@ void		check_acc(int *i, const char *s, va_list *ap, int *tab);
 void		check_modif(int *i, const char *s, int *tab);
 int			check_type(int *tab , char c);
 int			is_typeforprintf(char c);
-char		*stock_str(va_list *ap, int *i, char *line, const char *fmt);
+char		*stock_str(va_list *ap, int *i, t_list *elem, const char *fmt);
 void		reset_tab(int *tab, int i);
 char		*ft_dtoa(long double i, int size);
 char		*ft_convertbase(unsigned long long i, int base);
 char		*putline_nbr(char *line, t_list *elem, int *tab);
 char		*putline_str(char *line, t_list *elem, int *tab, const char *fmt);
-char		*print_arg(int *tab, va_list *arg, char *line, const char *format);
+char		*print_arg(int *tab, va_list *arg, t_list *elem, const char *format);
 void		init_pt_tab(char *(**types)(va_list *arg, char *buffer, int *tab));
 char		*check_percent(va_list *arg, char *buffer, int *tab);
 char		*get_int(va_list *arg, char *buffer, int *tab);
@@ -60,7 +62,8 @@ char		*get_scient(va_list *arg, char *buffer, int *tab);
 char		*get_scient_up(va_list *arg, char *buffer, int *tab);
 char		*get_shorter(va_list *arg, char *buffer, int *tab);
 char		*get_shorter_up(va_list *arg, char *buffer, int *tab);
-int			size_forscient(double *i);
+int			size_forscient(long double *i);
+int			size_forscient_normal(double *i);
 char		*arg_forscient(char *buffer, int n);
 char		*arg_forscient_up(char *buffer, int n);
 char		*get_point(va_list *arg, char *buffer, int *tab);
