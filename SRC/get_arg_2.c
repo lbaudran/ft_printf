@@ -6,17 +6,18 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/04 16:35:36 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/27 17:08:54 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/28 18:02:35 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 #include <stdio.h>
 
-char	*get_hexa_low(va_list *arg, char *buffer, int *tab)
+char	*get_hexa_low(va_list *arg, char *buffer, int *tab, t_list *elem)
 {
 	unsigned int		i;
-	char	*(*modif_unsigned[7])(va_list *arg, char *buffer, int *tab, int base);
+	char				*(*modif_unsigned[7])(va_list *arg,
+			char *buffer, int *tab, int base);
 
 	init_unsigned_tab(modif_unsigned);
 	buffer = modif_unsigned[tab[6]](arg, buffer, tab, 16);
@@ -26,10 +27,11 @@ char	*get_hexa_low(va_list *arg, char *buffer, int *tab)
 	return (buffer);
 }
 
-char	*get_hexa_up(va_list *arg, char *buffer, int *tab)
+char	*get_hexa_up(va_list *arg, char *buffer, int *tab, t_list *elem)
 {
 	int		i;
-	char	*(*modif_unsigned[7])(va_list *arg, char *buffer, int *tab, int base);
+	char	*(*modif_unsigned[7])(va_list *arg, char *buffer, int *tab,
+			int base);
 
 	i = 0;
 	init_unsigned_tab(modif_unsigned);
@@ -45,7 +47,7 @@ char	*get_hexa_up(va_list *arg, char *buffer, int *tab)
 	return (buffer);
 }
 
-char	*get_double(va_list *arg, char *buffer, int *tab)
+char	*get_double(va_list *arg, char *buffer, int *tab, t_list *elem)
 {
 	double		i;
 	long double	y;
@@ -66,7 +68,7 @@ char	*get_double(va_list *arg, char *buffer, int *tab)
 	return (buffer);
 }
 
-char	*get_scient(va_list *arg, char *buffer, int *tab)
+char	*get_scient(va_list *arg, char *buffer, int *tab, t_list *elem)
 {
 	double		i;
 	int			n;
@@ -94,7 +96,7 @@ char	*get_scient(va_list *arg, char *buffer, int *tab)
 	return (buffer);
 }
 
-char	*get_scient_up(va_list *arg, char *buffer, int *tab)
+char	*get_scient_up(va_list *arg, char *buffer, int *tab, t_list *elem)
 {
 	double		i;
 	int			n;

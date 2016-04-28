@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/19 15:06:35 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/19 16:29:56 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/28 18:23:17 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ char		*apply_diez_shorter_low(char *tmp, char *buffer, int *tab)
 		buffer = (char *)malloc((ft_strlen(str) + 1) * sizeof(char));
 		ft_bzero(buffer, ft_strlen(str) + 1);
 		ft_strcpy(buffer, str);
-		return(buffer);
+		return (buffer);
 	}
 	else
-		return(apply_diez_shorter_low2(tmp, buffer, tab));
+		return (apply_diez_shorter_low2(tmp, buffer, tab));
 }
 
 char		*apply_diez_shorter_low2(char *tmp, char *buffer, int *tab)
@@ -64,5 +64,5 @@ char		*apply_diez_shorter_low2(char *tmp, char *buffer, int *tab)
 	buffer = (char *)malloc((ft_strlen(str) + 1) * sizeof(char));
 	ft_bzero(buffer, ft_strlen(str) + 1);
 	ft_strcpy(buffer, str);
-	return(buffer);
+	return (buffer);
 }

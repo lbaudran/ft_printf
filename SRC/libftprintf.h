@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:47:27 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/27 18:59:12 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/28 19:54:05 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,16 @@ typedef struct			s_list
 {
 	char				*line;
 	int					index;
+	int					aff_null;
+	int					aff_null_w;
 	wchar_t				*unicode;
 }						t_list;
 
-void			ft_putprintf(int *tab, t_list *elem);
+void		check_type_3(int *tab, char c);
+void		ft_wstrncpy(wchar_t *wstr, wchar_t *src, int i);
+void		ft_wstrcpy(wchar_t *wstr, wchar_t *src);
+int			ft_wstrlen(wchar_t *wstr);
+void		ft_putprintf(int *tab, t_list *elem);
 char		*ft_addzero(char *buffer, int *tab);
 void		ft_add_nul(char *buffer, int a);
 int			is_check(char c);
@@ -46,36 +52,39 @@ char		*ft_dtoa(long double i, int size);
 char		*ft_convertbase(unsigned long long i, int base);
 char		*putline_nbr(char *line, t_list *elem, int *tab);
 char		*putline_str(char *line, t_list *elem, int *tab, const char *fmt);
-char		*print_arg(int *tab, va_list *arg, t_list *elem, const char *format);
-void		init_pt_tab(char *(**types)(va_list *arg, char *buffer, int *tab));
-char		*check_percent(va_list *arg, char *buffer, int *tab);
-char		*get_int(va_list *arg, char *buffer, int *tab);
-char		*get_char(va_list *arg, char *buffer, int *tab);
-char		*get_nothing(va_list *arg, char *buffer, int *tab);
-char		*get_str(va_list *arg, char *buffer, int *tab);
-char		*get_int_ns(va_list *arg, char *buffer, int *tab);
-char		*get_octal(va_list *arg, char *buffer, int *tab);
-char		*get_hexa_low(va_list *arg, char *buffer, int *tab);
-char		*get_hexa_up(va_list *arg, char *buffer, int *tab);
-char		*get_double(va_list *arg, char *buffer, int *tab);
-char		*get_scient(va_list *arg, char *buffer, int *tab);
-char		*get_scient_up(va_list *arg, char *buffer, int *tab);
-char		*get_shorter(va_list *arg, char *buffer, int *tab);
-char		*get_shorter_up(va_list *arg, char *buffer, int *tab);
+char		*print_arg(int *tab, va_list *arg, t_list *elem, const char *fmt);
+void		init_pt_tab(char *(**types)
+		(va_list *arg, char *buffer, int *tab, t_list *elem));
+char		*check_percent(va_list *arg, char *buffer, int *tab, t_list *elem);
+char		*get_int(va_list *arg, char *buffer, int *tab, t_list *elem);
+char		*get_char(va_list *arg, char *buffer, int *tab, t_list *elem);
+char		*get_nothing(va_list *arg, char *buffer, int *tab, t_list *elem);
+char		*get_str(va_list *arg, char *buffer, int *tab, t_list *elem);
+char		*get_int_ns(va_list *arg, char *buffer, int *tab, t_list *elem);
+char		*get_octal(va_list *arg, char *buffer, int *tab, t_list *elem);
+char		*get_hexa_low(va_list *arg, char *buffer, int *tab, t_list *elem);
+char		*get_hexa_up(va_list *arg, char *buffer, int *tab, t_list *elem);
+char		*get_double(va_list *arg, char *buffer, int *tab, t_list *elem);
+char		*get_scient(va_list *arg, char *buffer, int *tab, t_list *elem);
+char		*get_scient_up(va_list *arg, char *buffer, int *tab, t_list *elem);
+char		*get_shorter(va_list *arg, char *buffer, int *tab, t_list *elem);
+char		*get_shorter_up(va_list *arg, char *buffer, int *tab, t_list *elem);
+char		*get_wstring(va_list *arg, char *buffer, int *tab, t_list *elem);
 int			size_forscient(long double *i);
 int			size_forscient_normal(double *i);
 char		*arg_forscient(char *buffer, int n);
 char		*arg_forscient_up(char *buffer, int n);
-char		*get_point(va_list *arg, char *buffer, int *tab);
+char		*get_point(va_list *arg, char *buffer, int *tab, t_list *elem);
 char		*fill_point(char *buffer);
-char		*get_binary(va_list *arg, char *buffer, int *tab);
-char		*ft_apply_flag(int *tab, char *buffer);
+char		*get_binary(va_list *arg, char *buffer, int *tab, t_list *elem);
+char		*ft_apply_flag(int *tab, char *buffer, t_list *elem);
+char		*ft_apply_flag_2(int *t, char *buf, char *tmp, t_list *elem);
 void		init_diez_tab(char *(**diez)(char *tmp, char *buffer, int *tab));
 void		init_signed_tab(char *(**modif_signed)
 			(va_list *arg, char *buffer, int *tab));
 void		init_unsigned_tab(char *(**modif_unsigned)
 			(va_list *arg, char *buffer, int *tab, int base));
-char		*ft_add_empty(char *tmp, int *tab, char *buffer);
+char		*ft_add_empty(char *tmp, int *tab, char *buffer, t_list *elem);
 char		*ft_utoa(unsigned int n);
 char		*apply_diez_octal(char *tmp, char *buffer, int *tab);
 char		*apply_diez_hexa_low(char *tmp, char *buffer, int *tab);
@@ -105,15 +114,16 @@ char		*get_short_short_int(va_list *arg, char *buffer, int *tab);
 char		*get_normal_int(va_list *arg, char *buffer, int *tab);
 char		*get_int_max(va_list *arg, char* buffer, int *tab);
 char		*get_size_int(va_list *arg, char *buffer, int *tab);
-char	*get_long_long_unsigned(va_list *arg, char *buffer, int *tab, int base);
-char	*get_long_unsigned(va_list *arg, char *buffer, int *tab, int base);
-char	*get_short_unsigned(va_list *arg, char *buffer, int *tab, int base);
-char	*get_normal_unsigned(va_list *arg, char *buffer, int *tab, int base);
-char	*get_short_short_unsigned(va_list *arg, char *buffer, int *tab,
+char		*get_long_long_unsigned(va_list *arg, char *buffer, int *tab,
+		int base);
+char		*get_long_unsigned(va_list *arg, char *buffer, int *tab, int base);
+char		*get_short_unsigned(va_list *arg, char *buf, int *tab, int base);
+char		*get_normal_unsigned(va_list *arg, char *buffer, int *tab,
+		int base);
+char		*get_short_short_unsigned(va_list *arg, char *buffer, int *tab,
 		int base);
 char		*get_size_unsigned(va_list *arg, char *buffer, int *tab, int base);
 char		*get_unsigned_max(va_list *arg, char *buffer, int *tab, int base);
-char		*get_nothing(va_list *arg, char *buffer, int *tab);
 
 
 #endif

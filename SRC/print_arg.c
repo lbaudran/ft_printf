@@ -6,7 +6,7 @@
 /*   By: rfernand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 16:55:42 by rfernand          #+#    #+#             */
-/*   Updated: 2016/04/27 19:11:54 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/28 20:12:36 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,20 @@
 
 char		*print_arg(int *tab, va_list *arg, t_list *elem, const char *fmt)
 {
-	char			*buffer;
-	char			*buf;
-	int				n;
-	char			*(*types[16])(va_list *arg, char *buffer, int *tab);
+	char	*buffer;
+	char	*buf;
+	int		n;
+	char	*(*types[17])(va_list *arg, char *buffer, int *tab, t_list *elem);
 
 	n = ft_strlen(elem->line);
 	buf = (char *)malloc((n + 1) * sizeof(char));
 	ft_strcpy(buf, elem->line);
 	init_pt_tab(types);
-	buffer = types[tab[7]](arg, buffer, tab);
+	buffer = types[tab[7]](arg, buffer, tab, elem);
 	free(elem->line);
-		buffer = ft_apply_flag(tab, buffer);
+	if ((tab[7] != 11 || tab[6] != 3) && 
+			tab[7] != 16 && (tab[7] != 12 || tab[6] != 3))
+		buffer = ft_apply_flag(tab, buffer, elem);
 //	else
 //		ft_apply_flag_unicode(tab, elem);
 	elem->line = (char *)malloc((n + ft_strlen(buffer) + ft_strlen(fmt) + 1) *
@@ -39,7 +41,7 @@ char		*print_arg(int *tab, va_list *arg, t_list *elem, const char *fmt)
 	return (elem->line);
 }
 
-char		*ft_apply_flag_2(int *t, char *buf, char *tmp)
+char		*ft_apply_flag_2(int *t, char *buf, char *tmp, t_list *elem)
 {
 	char	*(*diez[11])(char *tmp, char *buffer, int *tab);
 
@@ -50,12 +52,12 @@ char		*ft_apply_flag_2(int *t, char *buf, char *tmp)
 		buf = diez[t[7]](tmp, buf, t);
 	ft_strcat(tmp, buf);
 	if (t[4] > (int)ft_strlen(buf))
-		tmp = ft_add_empty(tmp, t, buf);
+		tmp = ft_add_empty(tmp, t, buf, elem);
 	free(buf);
-	return(tmp);
+	return (tmp);
 }
 
-char		*ft_apply_flag(int *t, char *buf)
+char		*ft_apply_flag(int *t, char *buf, t_list *elem)
 {
 	char	*tmp;
 
@@ -72,11 +74,11 @@ char		*ft_apply_flag(int *t, char *buf)
 		tmp = (char *)malloc((ft_strlen(buf) + 4) * sizeof(char));
 		ft_bzero(tmp, ft_strlen(buf) + 4);
 	}
-	tmp = ft_apply_flag_2(t, buf, tmp);
+	tmp = ft_apply_flag_2(t, buf, tmp, elem);
 	return (tmp);
 }
 
-char		*ft_add_empty(char *tmp, int *tab, char *buffer)
+char		*ft_add_empty(char *tmp, int *tab, char *buffer, t_list *elem)
 {
 	int		n;
 	int		i;
@@ -85,8 +87,16 @@ char		*ft_add_empty(char *tmp, int *tab, char *buffer)
 	i = 0;
 	n = ft_strlen(tmp);
 	if (tab[0] == '-')
+	{
 		while (tab[4] - n)
 			tmp[n++] = tab[3];
+		if (elem->aff_null)
+		{
+			tmp[0] = 0;
+			ft_memmove(elem->line + ft_strlen(elem->line), tmp, tab[4]);
+		}
+		printf("%s\n", elem->line+ 1);
+	}
 	else
 	{
 		ft_bzero(tmp2, tab[4] + 1);

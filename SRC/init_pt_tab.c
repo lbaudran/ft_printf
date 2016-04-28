@@ -6,13 +6,14 @@
 /*   By: rfernand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/02 16:08:04 by rfernand          #+#    #+#             */
-/*   Updated: 2016/04/25 19:11:19 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/28 18:49:14 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-void	init_pt_tab(char *(**types)(va_list *arg, char *buffer, int *tab))
+void	init_pt_tab(char *(**types)(va_list *arg, char *buffer, int *tab,
+			t_list *elem))
 {
 	types[0] = &get_nothing;
 	types[1] = &get_int;
@@ -30,6 +31,7 @@ void	init_pt_tab(char *(**types)(va_list *arg, char *buffer, int *tab))
 	types[13] = &get_point;
 	types[14] = &get_binary;
 	types[15] = &check_percent;
+	types[16] = &get_wstring;
 }
 
 void	init_diez_tab(char *(**diez)(char *tmp, char *buffer, int *tab))

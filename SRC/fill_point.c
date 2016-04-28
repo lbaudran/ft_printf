@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 15:46:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/26 11:33:59 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/28 18:20:46 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void		ft_add_nul(char *buffer, int a)
 		buffer[a] = '\0';
 }
 
-char			*ft_addzero(char *buffer, int *tab)
+char		*ft_addzero(char *buffer, int *tab)
 {
 	int		n;
 	int		y;

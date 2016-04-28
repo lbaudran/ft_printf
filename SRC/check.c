@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 16:36:37 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/26 17:51:43 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/28 17:58:23 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int				check_start(int *i, const char *s, va_list *ap, int *tab)
 			check_type(tab, s[(*i)++]);
 			return (1);
 		}
-		
 	}
 	if (s[*i])
 		tab[8] = s[(*i)++];
@@ -102,7 +101,7 @@ void			check_acc(int *i, const char *s, va_list *ap, int *tab)
 	(*i)++;
 	n = 0;
 	ft_bzero(tmp, 19);
-	if (((s[*i] == '0' && !ft_isdigit(s[(*i) + 1])) || (!ft_isdigit(s[*i]))) 
+	if (((s[*i] == '0' && !ft_isdigit(s[(*i) + 1])) || (!ft_isdigit(s[*i])))
 			&& s[*i] != '*')
 	{
 		tab[5] = -1;

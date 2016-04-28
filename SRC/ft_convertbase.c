@@ -6,7 +6,7 @@
 /*   By: rfernand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/02 15:33:59 by rfernand          #+#    #+#             */
-/*   Updated: 2016/04/25 17:50:38 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/28 18:20:32 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ char			*ft_convertbase(unsigned long long i, int base)
 	n = 0;
 	u = 0;
 	if (!i)
-		return(ft_itoa(0));
+		return (ft_itoa(0));
 	while (y >= 1)
 	{
 		y /= base;
 		n++;
 	}
-	str = (char *) malloc((n + 1)* sizeof(char));
+	str = (char *)malloc((n + 1) * sizeof(char));
 	ft_bzero(str, n + 1);
 	while (n--)
 	{

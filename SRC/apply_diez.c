@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/19 14:31:41 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/26 17:28:37 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/28 18:22:34 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ char		*apply_diez_octal(char *tmp, char *buffer, int *tab)
 	int	i;
 
 	if (buffer[0] == '0')
-		return(buffer);
+		return (buffer);
 	tmp[0] = '0';
-	return(buffer);
+	return (buffer);
 }
 
 char		*apply_diez_hexa_low(char *tmp, char *buffer, int *tab)
@@ -31,10 +31,10 @@ char		*apply_diez_hexa_low(char *tmp, char *buffer, int *tab)
 		i++;
 	if ((i != 1 && buffer[i] != '\0') && tab[5] != -1)
 	{
-	tmp[0] = '0';
-	tmp[1] = 'x';
+		tmp[0] = '0';
+		tmp[1] = 'x';
 	}
-	return(buffer);
+	return (buffer);
 }
 
 char		*apply_diez_hexa_up(char *tmp, char *buffer, int *tab)
@@ -46,10 +46,10 @@ char		*apply_diez_hexa_up(char *tmp, char *buffer, int *tab)
 		i++;
 	if ((i != 1 && buffer[i] != '\0') && tab[5] != -1)
 	{
-	tmp[0] = '0';
-	tmp[1] = 'X';
+		tmp[0] = '0';
+		tmp[1] = 'X';
 	}
-	return(buffer);
+	return (buffer);
 }
 
 char		*apply_diez_double(char *tmp, char *buffer, int *tab)
@@ -57,7 +57,7 @@ char		*apply_diez_double(char *tmp, char *buffer, int *tab)
 	char	str[ft_strlen(buffer) + 2];
 
 	if (ft_strchr(buffer, '.'))
-		return(buffer);
+		return (buffer);
 	ft_bzero(str, ft_strlen(buffer) + 2);
 	ft_strcpy(str, buffer);
 	str[ft_strlen(str)] = '.';
@@ -65,7 +65,7 @@ char		*apply_diez_double(char *tmp, char *buffer, int *tab)
 	buffer = (char *)malloc((ft_strlen(str) + 1) * sizeof(char));
 	ft_bzero(buffer, ft_strlen(str) + 1);
 	ft_strcpy(buffer, str);
-	return(buffer);
+	return (buffer);
 }
 
 char		*apply_diez_scient_low(char *tmp, char *buffer, int *tab)
@@ -74,7 +74,7 @@ char		*apply_diez_scient_low(char *tmp, char *buffer, int *tab)
 	char	*point;
 
 	if (ft_strchr(buffer, '.'))
-		return(buffer);
+		return (buffer);
 	ft_bzero(str, ft_strlen(buffer) + 2);
 	str[0] = buffer[0];
 	str[1] = '.';
@@ -84,5 +84,5 @@ char		*apply_diez_scient_low(char *tmp, char *buffer, int *tab)
 	buffer = (char *)malloc((ft_strlen(str) + 1) * sizeof(char));
 	ft_bzero(buffer, ft_strlen(str) + 1);
 	ft_strcpy(buffer, str);
-	return(buffer);
+	return (buffer);
 }

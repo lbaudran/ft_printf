@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/25 16:36:27 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/25 16:40:09 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/28 17:55:15 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ char	*get_normal_unsigned(va_list *arg, char *buffer, int *tab, int base)
 	return (buffer);
 }
 
-char	*get_short_short_unsigned(va_list *arg, char *buffer, int *tab, int base)
+char	*get_short_short_unsigned(va_list *arg, char *buf, int *tab, int base)
 {
 	unsigned char	i;
 
 	i = va_arg((*arg), unsigned int);
-	buffer = ft_convertbase(i, base);
-	return (buffer);
+	buf = ft_convertbase(i, base);
+	return (buf);
 }
 
 char	*get_short_unsigned(va_list *arg, char *buffer, int *tab, int base)

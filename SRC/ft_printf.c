@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:28:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/27 19:08:22 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/28 20:11:46 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void		ft_clear_struct(t_list *elem)
 {
 	free(elem->line);
 	free(elem->unicode);
+	free(elem);
 }
 
 t_list		*create_struct(const char *fmt)
@@ -24,8 +25,10 @@ t_list		*create_struct(const char *fmt)
 
 	elem = (t_list *)malloc(sizeof(t_list));
 	elem->index = 0;
+	elem->aff_null = 0;
+	elem->aff_null_w = 0;
 	elem->line = (char *)malloc((ft_strlen(fmt) + 1) * sizeof(char));
-	elem->unicode = (wchar_t *)malloc((ft_strlen(fmt) + 1)* sizeof(wchar_t *));
+	elem->unicode = (wchar_t *)malloc((ft_strlen(fmt) + 1) * sizeof(wchar_t *));
 	ft_bzero(elem->line, ft_strlen(fmt) + 1);
 	ft_bzero(elem->unicode, ft_strlen(fmt) + 1);
 	return (elem);
@@ -36,11 +39,23 @@ void			ft_putprintf(int *tab, t_list *elem)
 	int		i;
 
 	i = 0;
-	elem->index += write(1, elem->line, ft_strlen(elem->line));
-	ft_bzero(elem->line, ft_strlen(elem->line));
-	while (elem->unicode[i])
+	while (elem->line[i] || elem->aff_null != 0)
 	{
-		if (elem->unicode[i] <= 0x7F)
+		if (elem->aff_null && elem->line[i] == '\0')
+			elem->index += write(1, &elem->line[i++], (elem->aff_null)--);
+		else if (elem->line[i])
+			elem->index += write(1, &elem->line[i++], 1);
+	}
+	ft_bzero(elem->line, ft_strlen(elem->line));
+	i = 0;
+	while (elem->unicode[i] || elem->aff_null_w != 0)
+	{
+		if (elem->unicode[i] == '\0' && elem->aff_null_w)
+		{
+			elem->aff_null_w = 0;
+			write(1, "\0", 1);
+		}
+		else if (elem->unicode[i] <= 0x7F)
 			write(1, &elem->unicode[i], 1);
 		else if (elem->unicode[i] <= 0x7FF)
 			write(1, &elem->unicode[i], 2);
@@ -51,6 +66,7 @@ void			ft_putprintf(int *tab, t_list *elem)
 		i++;
 		(elem->index)++;
 	}
+	ft_bzero(elem->unicode, i);
 }
 
 int			ft_printf(const char *fmt, ...)
@@ -74,6 +90,7 @@ int			ft_printf(const char *fmt, ...)
 	}
 	va_end(ap);
 	elem->index += write(1, elem->line, ft_strlen(elem->line));
+	i = elem->index;
 	ft_clear_struct(elem);
 	return (elem->index);
 }
@@ -92,7 +109,7 @@ char		*stock_str(va_list *ap, int *i, t_list *elem, const char *fmt)
 	free(tab);
 	return (elem->line);
 }
-/*
+
 int	main()
 {
 	int	i;
@@ -100,9 +117,12 @@ int	main()
 	char *t;
 	t = "%5.0x";
 	char	w = (char)-127;
-	i = printf("%Le\n", (long double)-1);
+	//i = printf("%.2c\n", NULL);
 //	printf("%d\n" , i);
-	i = ft_printf("%Le\n", (long double)-1);
+//	printf("% S\n", NULL);
+	ft_printf("%*c\n", -15, 0);
+	printf("%*c\n", -15, 0);
+//	i = ft_printf("%C\n", 'a');
 //	printf("%d\n" , i);
 	//printf("@moulitest: %5.x", t, 0, 0);
-}*/
+}

@@ -6,13 +6,13 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 15:19:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/27 19:11:59 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/28 17:54:14 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-char		*get_point(va_list *arg, char *buffer, int *tab)
+char		*get_point(va_list *arg, char *buffer, int *tab, t_list *elem)
 {
 	long		i;
 
@@ -28,7 +28,7 @@ char		*get_point(va_list *arg, char *buffer, int *tab)
 	return (buffer);
 }
 
-char		*get_shorter(va_list *arg, char *buffer, int *tab)
+char		*get_shorter(va_list *arg, char *buffer, int *tab, t_list *elem)
 {
 	double	i;
 	int		n;
@@ -56,12 +56,12 @@ char		*get_shorter(va_list *arg, char *buffer, int *tab)
 	return (buffer);
 }
 
-char		*get_shorter_up(va_list *arg, char *buffer, int *tab)
+char		*get_shorter_up(va_list *arg, char *buffer, int *tab, t_list *elem)
 {
 	int		n;
 
 	n = 0;
-	buffer = get_shorter(arg, buffer, tab);
+	buffer = get_shorter(arg, buffer, tab, elem);
 	while (buffer[n])
 	{
 		buffer[n] = ft_toupper(buffer[n]);
@@ -70,11 +70,40 @@ char		*get_shorter_up(va_list *arg, char *buffer, int *tab)
 	return (buffer);
 }
 
-char		*get_binary(va_list *arg, char *buffer, int *tab)
+char		*get_binary(va_list *arg, char *buffer, int *tab, t_list *elem)
 {
 	int		i;
 
 	i = va_arg((*arg), int);
 	buffer = ft_convertbase(i, 2);
+	return (buffer);
+}
+
+char		*get_wstring(va_list *arg, char *buffer, int *tab, t_list *elem)
+{
+	wchar_t	*t;
+	int		i;
+
+	buffer = malloc(1 * sizeof(char));
+	i = 0;
+	t = va_arg((*arg), wchar_t *);
+	if (t)
+	{
+		elem->unicode = malloc((ft_wstrlen(t) + 1) * sizeof(wchar_t));
+		ft_bzero(elem->unicode, ft_wstrlen(t) + 1);
+	}
+	else
+	{
+		elem->unicode = (wchar_t *)malloc(7 * sizeof(wchar_t));
+		t = (wchar_t *)malloc(7 * sizeof(wchar_t));
+		ft_wstrcpy(t, L"(null)\0");
+		i++;
+	}
+	if (tab[5] && t && tab[5] != -1)
+		ft_wstrncpy(elem->unicode, t, tab[5]);
+	else if (!tab[5] && t)
+		ft_wstrcpy(elem->unicode, t);
+	if (i)
+		free(t);
 	return (buffer);
 }

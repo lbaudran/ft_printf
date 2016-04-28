@@ -6,21 +6,15 @@
 /*   By: rfernand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 18:32:59 by rfernand          #+#    #+#             */
-/*   Updated: 2016/04/26 15:47:24 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/28 18:53:18 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-void	check_type_2(int *tab, char c)
+void	check_type_3(int *tab, char c)
 {
-	if (c == 'g')
-		tab[7] = 9;
-	if (c == 'G')
-		tab[7] = 10;
-	if (c == 'c' || c == 'C')
-		tab[7] = 11;
-	if (c == 's' || c == 'S')
+	if (c == 's')
 		tab[7] = 12;
 	if (c == 'p')
 		tab[7] = 13;
@@ -39,9 +33,25 @@ void	check_type_2(int *tab, char c)
 	if (c == 'E')
 		tab[7] = 8;
 }
+void	check_type_2(int *tab, char c)
+{
+	if (c == 'g')
+		tab[7] = 9;
+	if (c == 'G')
+		tab[7] = 10;
+	if (c == 'c' || c == 'C')
+	{
+		tab[7] = 11;
+		if (c == 'C')
+			tab[6] = 3;
+	}
+	check_type_3(tab, c);
+}
 
 int		check_type(int *tab, char c)
 {
+	if (c == 'S')
+		tab[7] = 16;
 	if (c == 'd' || c == 'i' || c == 'D' || c == 'I')
 	{
 		tab[7] = 1;
@@ -66,7 +76,7 @@ int		check_type(int *tab, char c)
 	return (-1);
 }
 
-char		*check_percent(va_list *arg, char *buffer, int *tab)
+char	*check_percent(va_list *arg, char *buffer, int *tab, t_list *elem)
 {
 	buffer = (char *)malloc(2 * sizeof(char));
 	buffer[0] = '%';

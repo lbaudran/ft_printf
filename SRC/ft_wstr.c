@@ -1,31 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_int_2.c                                        :+:      :+:    :+:   */
+/*   ft_wstr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/25 16:32:17 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/28 18:00:55 by lbaudran         ###   ########.fr       */
+/*   Created: 2016/04/28 17:21:02 by lbaudran          #+#    #+#             */
+/*   Updated: 2016/04/28 18:07:11 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-char		*get_int_max(va_list *arg, char *buffer, int *tab)
+void		ft_wstrncpy(wchar_t *wstr, wchar_t *src, int i)
 {
-	intmax_t	i;
+	int	n;
 
-	i = va_arg((*arg), intmax_t);
-	buffer = ft_itoa(i);
-	return (buffer);
+	n = 0;
+	while (src[n] && i)
+	{
+		wstr[n] = src[n];
+		i++;
+		n--;
+	}
+	while (n > 0)
+	{
+		wstr[n++] = '\0';
+		i++;
+	}
 }
 
-char		*get_size_int(va_list *arg, char *buffer, int *tab)
+void		ft_wstrcpy(wchar_t *wstr, wchar_t *src)
 {
-	size_t	i;
+	int	n;
 
-	i = va_arg((*arg), size_t);
-	buffer = ft_itoa(i);
-	return (buffer);
+	n = 0;
+	while (src[n])
+	{
+		wstr[n] = src[n];
+		n++;
+	}
+	wstr[n] = '\0';
+}
+
+int			ft_wstrlen(wchar_t *wstr)
+{
+	int	i;
+
+	i = 0;
+	while (wstr[i])
+		i++;
+	return (i);
 }
