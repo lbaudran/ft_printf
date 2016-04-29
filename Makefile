@@ -24,6 +24,7 @@ SRC_NAME = apply_diez.c \
 		   get_unsigned_2.c \
 		   get_nothing.c \
 		   ft_wstr.c \
+		   ft_printwchar.c \
 
 
 LIBFT_NAME = ft_strcpy.c \

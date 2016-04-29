@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/28 17:21:02 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/28 18:07:11 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/29 14:48:33 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void		ft_wstrncpy(wchar_t *wstr, wchar_t *src, int i)
 		wstr[n++] = '\0';
 		i++;
 	}
+	wstr[n] = '\0';
 }
 
 void		ft_wstrcpy(wchar_t *wstr, wchar_t *src)

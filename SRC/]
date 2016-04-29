@@ -6,7 +6,7 @@
 /*   By: rfernand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 16:55:42 by rfernand          #+#    #+#             */
-/*   Updated: 2016/04/29 16:41:07 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/29 15:56:19 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,42 +44,15 @@ char		*ft_apply_flag_unicode(int *tab, t_list *elem)
 {
 	int	i;
 	int	n;
-	int y;
-	char	*tmp;
 
-	y = 0;
 	i = 0;
 	n = 0;
-	if (tab[3] == 0 && tab[7] == 11)
-		tab[3] = ' ';
-
 	if (tab[0] == '-')
 		while (elem->unicode[i])
-			ft_printwchar(elem->unicode[i++], elem);
-	y = i;
-	i = 0;
+			ft_wputchar(elem->unicode[i++], elem);
 	while (elem->unicode[i])
-		n += ft_size_octet(elem->unicode[i++]);
-	i = 0;
-	if (n < tab[4])
-	{
-		tmp = (char *)malloc ((tab[4] - n + 1) * sizeof(char));
-		ft_bzero(tmp, tab[4] - n + 1);
-		while (tab[4] - n)
-		{
-			tmp[i++] = tab[3];
-			n++;
-		}
-		elem->index += ft_printf("%s", tmp);
-		free(tmp);
-	}
-	i = 0;
-	if (tab[0] != '-')
-		while (elem->unicode[y])
-			ft_printwchar(elem->unicode[y++], elem);
-	elem->unicode[0] = '\0';
-	ft_bzero(elem->unicode, y);
-	return(NULL);
+		n = ft_size_octet(elem->unicode[i++])
+
 }
 
 char		*ft_apply_flag_2(int *t, char *buf, char *tmp, t_list *elem)

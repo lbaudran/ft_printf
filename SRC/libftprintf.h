@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:47:27 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/28 19:54:05 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/29 16:05:09 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ typedef struct			s_list
 	wchar_t				*unicode;
 }						t_list;
 
+char		*ft_apply_flag_unicode(int *tab, t_list *elem);
+int			ft_size_octet(wchar_t c);
+void		apply_acc_wchar(t_list *elem, int *tab);
+int			ft_size_bits(wchar_t c);
+int			ft_putchar(char c);
+void		ft_printwchar(wchar_t c, t_list *elem);
 void		check_type_3(int *tab, char c);
 void		ft_wstrncpy(wchar_t *wstr, wchar_t *src, int i);
 void		ft_wstrcpy(wchar_t *wstr, wchar_t *src);

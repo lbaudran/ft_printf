@@ -6,11 +6,12 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:28:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/28 20:11:46 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/29 16:46:57 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+#include <locale.h>
 
 void		ft_clear_struct(t_list *elem)
 {
@@ -46,26 +47,20 @@ void			ft_putprintf(int *tab, t_list *elem)
 		else if (elem->line[i])
 			elem->index += write(1, &elem->line[i++], 1);
 	}
-	ft_bzero(elem->line, ft_strlen(elem->line));
+	ft_bzero(elem->line, i);
 	i = 0;
 	while (elem->unicode[i] || elem->aff_null_w != 0)
 	{
 		if (elem->unicode[i] == '\0' && elem->aff_null_w)
 		{
 			elem->aff_null_w = 0;
-			write(1, "\0", 1);
+			elem->index += write(1, "\0", 1);
 		}
-		else if (elem->unicode[i] <= 0x7F)
-			write(1, &elem->unicode[i], 1);
-		else if (elem->unicode[i] <= 0x7FF)
-			write(1, &elem->unicode[i], 2);
-		else if (elem->unicode[i] <= 0xFFFF)
-			write(1, &elem->unicode[i], 3);
-		else if (elem->unicode[i] <= 0x10FFFF)
-			write(1, &elem->unicode[i], 4);
+		else
+			ft_printwchar(elem->unicode[i], elem);
 		i++;
-		(elem->index)++;
 	}
+	elem->unicode[0] = '\0';
 	ft_bzero(elem->unicode, i);
 }
 
@@ -110,19 +105,22 @@ char		*stock_str(va_list *ap, int *i, t_list *elem, const char *fmt)
 	return (elem->line);
 }
 
+/*
 int	main()
 {
+	setlocale(LC_ALL, "");
 	int	i;
 	char c = -1;
 	char *t;
 	t = "%5.0x";
 	char	w = (char)-127;
 	//i = printf("%.2c\n", NULL);
-//	printf("%d\n" , i);
 //	printf("% S\n", NULL);
-	ft_printf("%*c\n", -15, 0);
-	printf("%*c\n", -15, 0);
+	i =ft_printf("{%05.S}", L"42 c est cool");
+	printf("%d\n" , i);
+	i =printf("{%05.S}", L"42 c est cool");
+	printf("%d\n" , i);
 //	i = ft_printf("%C\n", 'a');
 //	printf("%d\n" , i);
 	//printf("@moulitest: %5.x", t, 0, 0);
-}
+}*/

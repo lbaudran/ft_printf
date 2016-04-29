@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 15:19:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/28 17:54:14 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/29 16:46:39 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,26 +84,26 @@ char		*get_wstring(va_list *arg, char *buffer, int *tab, t_list *elem)
 	wchar_t	*t;
 	int		i;
 
+	if (tab[5] == 0)
+		tab[5] = -1;
+	else if (tab[5] == -1)
+		tab[5] = 0;
 	buffer = malloc(1 * sizeof(char));
-	i = 0;
 	t = va_arg((*arg), wchar_t *);
 	if (t)
 	{
 		elem->unicode = malloc((ft_wstrlen(t) + 1) * sizeof(wchar_t));
 		ft_bzero(elem->unicode, ft_wstrlen(t) + 1);
+		ft_wstrcpy(elem->unicode, t);
 	}
 	else
 	{
 		elem->unicode = (wchar_t *)malloc(7 * sizeof(wchar_t));
-		t = (wchar_t *)malloc(7 * sizeof(wchar_t));
-		ft_wstrcpy(t, L"(null)\0");
-		i++;
+		ft_wstrcpy(elem->unicode, L"(null)\0");
 	}
-	if (tab[5] && t && tab[5] != -1)
-		ft_wstrncpy(elem->unicode, t, tab[5]);
-	else if (!tab[5] && t)
-		ft_wstrcpy(elem->unicode, t);
-	if (i)
-		free(t);
+	if (tab[5] >= 0)
+		apply_acc_wchar(elem, tab);
 	return (buffer);
 }
+
+

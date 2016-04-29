@@ -6,7 +6,7 @@
 /*   By: rfernand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 18:32:59 by rfernand          #+#    #+#             */
-/*   Updated: 2016/04/28 18:53:18 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/04/29 14:59:12 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	check_type_3(int *tab, char c)
 {
-	if (c == 's')
+	if (c == 's' && tab[6] != 3)
 		tab[7] = 12;
 	if (c == 'p')
 		tab[7] = 13;
@@ -50,7 +50,7 @@ void	check_type_2(int *tab, char c)
 
 int		check_type(int *tab, char c)
 {
-	if (c == 'S')
+	if (c == 'S' || (c == 's' && tab[6] == 3))
 		tab[7] = 16;
 	if (c == 'd' || c == 'i' || c == 'D' || c == 'I')
 	{
