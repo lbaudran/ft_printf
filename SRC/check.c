@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 16:36:37 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/28 17:58:23 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/05/02 15:49:24 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,8 @@ void			check_width(int *i, const char *s, va_list *ap, int *tab)
 void			check_acc(int *i, const char *s, va_list *ap, int *tab)
 {
 	char	tmp[19];
-	int		n;
 
 	(*i)++;
-	n = 0;
-	ft_bzero(tmp, 19);
 	if (((s[*i] == '0' && !ft_isdigit(s[(*i) + 1])) || (!ft_isdigit(s[*i])))
 			&& s[*i] != '*')
 	{
@@ -109,11 +106,7 @@ void			check_acc(int *i, const char *s, va_list *ap, int *tab)
 			(*i)++;
 	}
 	else if (s[*i] >= '0' && s[*i] <= '9')
-	{
-		while (s[*i] >= '0' && s[*i] <= '9')
-			tmp[n++] = s[(*i)++];
-		tab[5] = ft_atoi(tmp);
-	}
+		acc_reduct(s, i, tab);
 	else if (s[*i] == '*')
 	{
 		tab[5] = va_arg(*ap, int);

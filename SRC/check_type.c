@@ -6,7 +6,7 @@
 /*   By: rfernand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 18:32:59 by rfernand          #+#    #+#             */
-/*   Updated: 2016/04/29 14:59:12 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/05/02 15:09:24 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	check_type_3(int *tab, char c)
 	if (c == 'E')
 		tab[7] = 8;
 }
+
 void	check_type_2(int *tab, char c)
 {
 	if (c == 'g')

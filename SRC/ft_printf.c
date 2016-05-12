@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 15:28:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/29 16:46:57 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/05/02 15:17:33 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_list		*create_struct(const char *fmt)
 	return (elem);
 }
 
-void			ft_putprintf(int *tab, t_list *elem)
+void		ft_putprintf(int *tab, t_list *elem)
 {
 	int		i;
 
@@ -104,23 +104,3 @@ char		*stock_str(va_list *ap, int *i, t_list *elem, const char *fmt)
 	free(tab);
 	return (elem->line);
 }
-
-/*
-int	main()
-{
-	setlocale(LC_ALL, "");
-	int	i;
-	char c = -1;
-	char *t;
-	t = "%5.0x";
-	char	w = (char)-127;
-	//i = printf("%.2c\n", NULL);
-//	printf("% S\n", NULL);
-	i =ft_printf("{%05.S}", L"42 c est cool");
-	printf("%d\n" , i);
-	i =printf("{%05.S}", L"42 c est cool");
-	printf("%d\n" , i);
-//	i = ft_printf("%C\n", 'a');
-//	printf("%d\n" , i);
-	//printf("@moulitest: %5.x", t, 0, 0);
-}*/

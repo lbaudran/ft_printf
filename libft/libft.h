@@ -6,7 +6,7 @@
 /*   By: lbaudran <lbaudran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 16:30:26 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/29 14:35:04 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/05/02 16:27:26 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ char				*ft_strrchr(const char *str, int c);
 char				*ft_strstr(const char *str1, const char *str2);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
-
 void				*ft_memalloc(size_t size);
 void				ft_memdel(void **ap);
 char				*ft_strnew(size_t size);
@@ -68,8 +67,6 @@ void				ft_putnbr(int n);
 void				ft_putnbr_fd(int n, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putendl(char const *s);
-
-
 int					ft_max(int *tab);
 int					ft_min(int *tab);
 void				ft_swap(int *a, int *b);

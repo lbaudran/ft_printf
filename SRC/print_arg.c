@@ -6,7 +6,7 @@
 /*   By: rfernand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/25 16:55:42 by rfernand          #+#    #+#             */
-/*   Updated: 2016/04/29 16:41:07 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/05/02 16:25:45 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char		*print_arg(int *tab, va_list *arg, t_list *elem, const char *fmt)
 	init_pt_tab(types);
 	buffer = types[tab[7]](arg, buffer, tab, elem);
 	free(elem->line);
-	if ((tab[7] != 11 || tab[6] != 3) && 
+	if ((tab[7] != 11 || tab[6] != 3) &&
 			tab[7] != 16 && (tab[7] != 12 || tab[6] != 3))
 		buffer = ft_apply_flag(tab, buffer, elem);
 	else
@@ -36,15 +36,32 @@ char		*print_arg(int *tab, va_list *arg, t_list *elem, const char *fmt)
 		ft_memmove(elem->line + 1, elem->line, ft_strlen(elem->line));
 		elem->line[0] = '\0';
 	}
-		ft_putprintf(tab, elem);
+	ft_putprintf(tab, elem);
 	return (elem->line);
 }
 
-char		*ft_apply_flag_unicode(int *tab, t_list *elem)
+void		ft_apply_flag_unicode_2(int *tab, int n, t_list *elem)
 {
-	int	i;
-	int	n;
-	int y;
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	tmp = (char *)malloc((tab[4] - n + 1) * sizeof(char));
+	ft_bzero(tmp, tab[4] - n + 1);
+	while (tab[4] - n)
+	{
+		tmp[i++] = tab[3];
+		n++;
+	}
+	elem->index += ft_printf("%s", tmp);
+	free(tmp);
+}
+
+void		ft_apply_flag_unicode(int *tab, t_list *elem)
+{
+	int		i;
+	int		n;
+	int		y;
 	char	*tmp;
 
 	y = 0;
@@ -52,7 +69,6 @@ char		*ft_apply_flag_unicode(int *tab, t_list *elem)
 	n = 0;
 	if (tab[3] == 0 && tab[7] == 11)
 		tab[3] = ' ';
-
 	if (tab[0] == '-')
 		while (elem->unicode[i])
 			ft_printwchar(elem->unicode[i++], elem);
@@ -60,42 +76,14 @@ char		*ft_apply_flag_unicode(int *tab, t_list *elem)
 	i = 0;
 	while (elem->unicode[i])
 		n += ft_size_octet(elem->unicode[i++]);
-	i = 0;
 	if (n < tab[4])
-	{
-		tmp = (char *)malloc ((tab[4] - n + 1) * sizeof(char));
-		ft_bzero(tmp, tab[4] - n + 1);
-		while (tab[4] - n)
-		{
-			tmp[i++] = tab[3];
-			n++;
-		}
-		elem->index += ft_printf("%s", tmp);
-		free(tmp);
-	}
+		ft_apply_flag_unicode_2(tab, n, elem);
 	i = 0;
 	if (tab[0] != '-')
 		while (elem->unicode[y])
 			ft_printwchar(elem->unicode[y++], elem);
 	elem->unicode[0] = '\0';
 	ft_bzero(elem->unicode, y);
-	return(NULL);
-}
-
-char		*ft_apply_flag_2(int *t, char *buf, char *tmp, t_list *elem)
-{
-	char	*(*diez[11])(char *tmp, char *buffer, int *tab);
-
-	init_diez_tab(diez);
-	if (t[1] && ((t[7] >= 6 && t[7] <= 10) || t[7] == 1) && buf[0] != '-')
-		tmp[0] = t[1];
-	if (t[2] && ((t[7] >= 4 && t[7] <= 10) || t[7] == 2 || t[7] == 14))
-		buf = diez[t[7]](tmp, buf, t);
-	ft_strcat(tmp, buf);
-	if (t[4] > (int)ft_strlen(buf))
-		tmp = ft_add_empty(tmp, t, buf, elem);
-	free(buf);
-	return (tmp);
 }
 
 char		*ft_apply_flag(int *t, char *buf, t_list *elem)
@@ -131,21 +119,19 @@ char		*ft_add_empty(char *tmp, int *tab, char *buffer, t_list *elem)
 	{
 		while (tab[4] - n)
 			tmp[n++] = tab[3];
+		return (tmp);
 	}
-	else
+	ft_bzero(tmp2, tab[4] + 1);
+	while ((tmp[0] == '-' || tmp[0] == '+' || tmp[0] == 'x' || tmp[0] == '0'
+				|| tmp[0] == 'X' || tmp[0] == ' ') && tab[3] == '0')
 	{
-		ft_bzero(tmp2, tab[4] + 1);
-		while ((tmp[0] == '-' || tmp[0] == '+' || tmp[0] == 'x' || tmp[0] == '0'
-					|| tmp[0] == 'X' || tmp[0] == ' ') && tab[3] == '0')
-		{
-			tmp2[i++] = tmp[0];
-			ft_memmove(tmp, tmp + 1, ft_strlen(tmp));
-			n--;
-		}
-		while (i < tab[4] - n)
-			tmp2[i++] = tab[3];
-		ft_strcat(tmp2, tmp);
-		ft_strcpy(tmp, tmp2);
+		tmp2[i++] = tmp[0];
+		ft_memmove(tmp, tmp + 1, ft_strlen(tmp));
+		n--;
 	}
+	while (i < tab[4] - n)
+		tmp2[i++] = tab[3];
+	ft_strcat(tmp2, tmp);
+	ft_strcpy(tmp, tmp2);
 	return (tmp);
 }

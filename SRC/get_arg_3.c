@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 15:19:07 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/29 16:46:39 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/05/02 15:48:21 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ char		*get_wstring(va_list *arg, char *buffer, int *tab, t_list *elem)
 	wchar_t	*t;
 	int		i;
 
+	free(elem->unicode);
 	if (tab[5] == 0)
 		tab[5] = -1;
 	else if (tab[5] == -1)
@@ -105,5 +106,3 @@ char		*get_wstring(va_list *arg, char *buffer, int *tab, t_list *elem)
 		apply_acc_wchar(elem, tab);
 	return (buffer);
 }
-
-

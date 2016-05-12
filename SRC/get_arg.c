@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/01 19:25:48 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/29 15:41:27 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/05/02 15:16:42 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,7 @@ char	*get_str(va_list *arg, char *buffer, int *tab, t_list *elem)
 
 char	*get_int_ns(va_list *arg, char *buffer, int *tab, t_list *elem)
 {
-	unsigned int	i;
-	char			*(*modif_unsigned[7])(va_list *arg, char *buffer,
-			int *tab, int base);
+	char	*(*modif_unsigned[7])(va_list *arg, char *buf, int *tab, int base);
 
 	init_unsigned_tab(modif_unsigned);
 	buffer = modif_unsigned[tab[6]](arg, buffer, tab, 10);
@@ -96,7 +94,7 @@ char	*get_int_ns(va_list *arg, char *buffer, int *tab, t_list *elem)
 
 char	*get_octal(va_list *arg, char *buffer, int *tab, t_list *elem)
 {
-	char	*(*modif_unsigned[7])(va_list *arg, char *buffer, int *tab, int base);
+	char	*(*modif_unsigned[7])(va_list *arg, char *buf, int *tab, int base);
 	int		i;
 
 	i = 0;

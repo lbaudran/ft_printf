@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/04 16:35:36 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/28 18:02:35 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/05/02 15:19:38 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 
 char	*get_hexa_low(va_list *arg, char *buffer, int *tab, t_list *elem)
 {
-	unsigned int		i;
-	char				*(*modif_unsigned[7])(va_list *arg,
-			char *buffer, int *tab, int base);
+	char	*(*modif_unsigned[7])(va_list *arg, char *buf, int *tab, int base);
 
 	init_unsigned_tab(modif_unsigned);
 	buffer = modif_unsigned[tab[6]](arg, buffer, tab, 16);
@@ -30,8 +28,7 @@ char	*get_hexa_low(va_list *arg, char *buffer, int *tab, t_list *elem)
 char	*get_hexa_up(va_list *arg, char *buffer, int *tab, t_list *elem)
 {
 	int		i;
-	char	*(*modif_unsigned[7])(va_list *arg, char *buffer, int *tab,
-			int base);
+	char	*(*modif_unsigned[7])(va_list *arg, char *buf, int *tab, int base);
 
 	i = 0;
 	init_unsigned_tab(modif_unsigned);

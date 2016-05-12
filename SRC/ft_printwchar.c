@@ -6,7 +6,7 @@
 /*   By: lbaudran <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/29 14:11:18 by lbaudran          #+#    #+#             */
-/*   Updated: 2016/04/29 16:46:23 by lbaudran         ###   ########.fr       */
+/*   Updated: 2016/05/02 15:17:07 by lbaudran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int			ft_size_bits(wchar_t c)
 	return (i);
 }
 
-int		ft_putchar(char c)
+int			ft_putchar(char c)
 {
 	write(1, &c, 1);
 	return (1);
